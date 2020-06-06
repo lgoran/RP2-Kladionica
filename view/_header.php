@@ -35,7 +35,7 @@
 	<ul>
 		<a href="index.php?rt=kontorler/fja">Sport</a>
 		<a href="index.php?rt=kontorler/fja">Lutrija</a>
-		<a href="index.php?rt=kontorler/fja">Utrka pasa</a>
+		<a href="view/utrka_pasa.html">Utrka pasa</a>
 		<a href="index.php?rt=kontorler/fja">Kasino</a>
 		<a href="index.php?rt=kontorler/fja">Vaši listići</a>
 		<a href="index.php?rt=logout/logout">Odjavi se</a>
