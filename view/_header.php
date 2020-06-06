@@ -26,6 +26,17 @@
 		border-radius: 20px;
 		box-shadow: blue 6px 6px 50px;
 	}
+
+
+	.tablica_utakmica{
+	border-collapse:collapse;
+	}
+
+	.tablica_utakmica td{
+	border:2px solid green;
+	text-align: center; 
+    vertical-align: middle;
+	}
 	</style>
 </head>
 <body>
@@ -33,7 +44,7 @@
 	<?php if(isset($_SESSION['user'])) echo 'Dobrodošli @' . $_SESSION['user'].'!'; ?>
 	<hr>
 	<ul>
-		<a href="index.php?rt=kontorler/fja">Sport</a>
+		<a href="index.php?rt=sport/index">Sport</a>
 		<a href="index.php?rt=kontorler/fja">Lutrija</a>
 		<a href="view/utrka_pasa.html">Utrka pasa</a>
 		<a href="index.php?rt=kontorler/fja">Kasino</a>

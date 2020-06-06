@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../app/database/db.class.php';
 require_once __DIR__ . '/user.class.php';
+require_once __DIR__ . '/utakmice.class.php';
+require_once __DIR__ . '/tiket.class.php';
 //require_once __DIR__ . '/sveostaleklasedodatiovako.class.php';
 
 class KladionicaService
@@ -55,6 +57,26 @@ class KladionicaService
 		while( $row = $st->fetch() )
 		{
 			$arr[] = new User( $row['id'], $row['username'], $row['password_hash'], $row['email'] );
+		}
+
+		return $arr;
+	}
+	function dohvatiUtakmice()
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM Kladionica_Utakmice ORDER BY sport' );
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			//$id, $domaci, $gosti, $kvota1, $kvotaX, $kvota2, $kvota1X, $kvota2X
+			$arr[] = new Utakmica( $row['id'], $row['domaci'], $row['gosti'], $row['kvota1'], 
+					$row['kvotaX'], $row['kvota2'], $row['kvota1x'], $row['kvota2x'] );
 		}
 
 		return $arr;
