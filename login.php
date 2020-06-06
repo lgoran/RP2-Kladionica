@@ -51,8 +51,8 @@ if(isset($_POST['user']) && $_POST['user']!="" && isset($_POST['pw']) && $_POST[
 		else
 		{
 			try{
-				$st = $db->prepare( 'INSERT INTO Kladionica_Users (username, password_hash, email) VALUES (:username, :hash, :email)' );
-				$st->execute( array( 'username' => $user, 'hash' => $hash, 'email' => $_POST['email'] ) );
+				$st = $db->prepare( 'INSERT INTO Kladionica_Users (username, password_hash, email, iznos) VALUES (:username, :hash, :email :iznos)' );
+				$st->execute( array( 'username' => $user, 'hash' => $hash, 'email' => $_POST['email'], 'iznos' => 100 ) );
 			}catch(PDOException $e){
 				echo $e;
 			}
