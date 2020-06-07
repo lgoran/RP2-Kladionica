@@ -6,11 +6,13 @@
 	<button id="uplati">Odigraj tiket</button><br>
 	Ukupna kvota:<span id="ukupna_kvota">1</span><br>
 	Potencijalni dobitak:<span id="potencijalni_dobitak">2</span>
-
-
 </div>
-<table class="tablica_utakmica">
-	<?php 
+<?php
+for($j=0;$j<count($utakmice_po_sportovima);$j++)
+{
+	$utakmiceList=$utakmice_po_sportovima[$j];
+	echo '<h2 id="sport' . $j . '">'. $sportList[$j] . '(' . count($utakmiceList) .')</h2>';
+	echo '<table class="tablica_utakmica" id="tabla' . $j . '">';
 		if(count($utakmiceList)!=0)
 		{
             //$id, $domaci, $gosti, $kvota1, $kvotaX, $kvota2, $kvota1X, $kvota2X
@@ -33,7 +35,8 @@
 				 '<td><button id="' . $utakmica->id .'b2X">'. $utakmica->kvota2X . '</button></td>' .  
 			     '</tr>';
 		}
-	?>
-</table>
+	echo '</table>';
+}
+?>
 <script type="text/javascript" src="javascript/sport.js"></script>
 <?php require_once __DIR__ . '/_footer.php'; ?>

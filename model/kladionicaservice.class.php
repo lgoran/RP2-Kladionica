@@ -81,6 +81,44 @@ class KladionicaService
 
 		return $arr;
 	}
+	function dohvatiSportove()
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT DISTINCT sport FROM Kladionica_Utakmice ORDER BY sport' );
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			array_push($arr, $row['sport']);
+		}
+		return $arr;
+	}
+	function dohvatiUtakmiceSporta($sport)
+	{
+		
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM Kladionica_Utakmice WHERE sport="'. $sport . '"');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			//echo $row['domaci'] . $row['gosti'] . '<br>';
+			//$id, $domaci, $gosti, $kvota1, $kvotaX, $kvota2, $kvota1X, $kvota2X
+			$arr[] = new Utakmica( $row['id'], $row['domaci'], $row['gosti'], $row['kvota1'], 
+					$row['kvotaX'], $row['kvota2'], $row['kvota1x'], $row['kvota2x'] );
+		}
+		return $arr;
+		
+	}
 };
 
 ?>

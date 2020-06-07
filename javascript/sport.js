@@ -60,8 +60,22 @@ $( document ).ready(function() {
             }
             crtaj_listic();
     }
-    );
-    
+    )
+
+    $("h2").on("click",function()
+    {
+        var id=$(this).attr("id");
+        id=id.replace("sport","tabla");
+        console.log(id);
+        if($("#"+id).is(":hidden"))
+        {
+            $("#"+id).show();
+        }
+        else
+        {
+            $("#"+id).hide();
+        }
+    })
     
     
 });

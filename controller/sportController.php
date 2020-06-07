@@ -7,9 +7,13 @@ class SportController
 	{
 		$ks = new KladionicaService();
 		$title = 'Sportska ponuda';
-		
-		$utakmiceList=$ks->dohvatiUtakmice();
-		
+		$sportList=$ks->dohvatiSportove();
+
+		$utakmice_po_sportovima=array();
+		for($i=0;$i<count($sportList);$i++)
+		{
+			array_push($utakmice_po_sportovima,$ks->dohvatiUtakmiceSporta($sportList[$i]));
+		}
 		require_once __DIR__ . '/../view/sport_index.php';
 	}
 }; 
