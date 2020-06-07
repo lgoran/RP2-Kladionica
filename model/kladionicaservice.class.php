@@ -23,7 +23,7 @@ class KladionicaService
 		if( $row === false )
 			return null;
 		else
-			return new User( $row['id'], $row['username'], $row['password_hash'], $row['email']);
+			return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'], $row['iznos']);
 	}
 	function getUserByUsername( $username )
 	{
@@ -40,7 +40,7 @@ class KladionicaService
 		if( $row === false )
 			return null;
 		else
-			return new User( $row['id'], $row['username'], $row['password_hash'], $row['email']);
+			return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'],$row['iznos']);
 	}
 
 	function getAllUsers( )
@@ -56,7 +56,7 @@ class KladionicaService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new User( $row['id'], $row['username'], $row['password_hash'], $row['email'] );
+			$arr[] = new User( $row['id'], $row['username'], $row['password_hash'], $row['email'], $row['iznos']);
 		}
 
 		return $arr;
