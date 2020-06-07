@@ -15,8 +15,6 @@ for($j=0;$j<count($utakmice_po_sportovima);$j++)
 	echo '<table class="tablica_utakmica" id="tabla' . $j . '">';
 		if(count($utakmiceList)!=0)
 		{
-            //$id, $domaci, $gosti, $kvota1, $kvotaX, $kvota2, $kvota1X, $kvota2X
-
 			echo '<tr><th>Domaći</th><th>Gosti</th><th>1</th><th>X</th><th>2</th><th>1X</th><th>2X</th></tr>';
 		}
 		else 

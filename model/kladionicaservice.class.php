@@ -74,7 +74,6 @@ class KladionicaService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			//$id, $domaci, $gosti, $kvota1, $kvotaX, $kvota2, $kvota1X, $kvota2X
 			$arr[] = new Utakmica( $row['id'], $row['domaci'], $row['gosti'], $row['kvota1'], 
 					$row['kvotaX'], $row['kvota2'], $row['kvota1x'], $row['kvota2x'] );
 		}
@@ -111,8 +110,6 @@ class KladionicaService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			//echo $row['domaci'] . $row['gosti'] . '<br>';
-			//$id, $domaci, $gosti, $kvota1, $kvotaX, $kvota2, $kvota1X, $kvota2X
 			$arr[] = new Utakmica( $row['id'], $row['domaci'], $row['gosti'], $row['kvota1'], 
 					$row['kvotaX'], $row['kvota2'], $row['kvota1x'], $row['kvota2x'] );
 		}
