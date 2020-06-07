@@ -5,40 +5,6 @@
 	<title>Kladionica</title>
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-	<style>
-	ul{
-		list-style: none;
-		font-size: 15px;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	}
-	li{
-		margin-top: 30px;
-	}
-
-	ul a{
-		text-decoration: none;
-		color: red;
-		padding: 5px 20px;
-		
-	}
-	ul a:hover{
-		background: #fff;
-		color: black;
-		border-radius: 20px;
-		box-shadow: blue 6px 6px 50px;
-	}
-
-
-	.tablica_utakmica{
-	border-collapse:collapse;
-	}
-
-	.tablica_utakmica td{
-	border:2px solid green;
-	text-align: center; 
-    vertical-align: middle;
-	}
-	</style>
 </head>
 <body>
 	<h1>Kladionica</h1>
