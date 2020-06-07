@@ -4,6 +4,7 @@
 	<meta charset="utf8">
 	<title>Kladionica</title>
 	<link rel="stylesheet" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 	<style>
 	ul{
 		list-style: none;
@@ -46,7 +47,7 @@
 	<ul>
 		<a href="index.php?rt=sport/index">Sport</a>
 		<a href="index.php?rt=kontorler/fja">Lutrija</a>
-		<a href="view/utrka_pasa.html">Utrka pasa</a>
+		<a href="index.php?rt=utrka_pasa/index">Utrka pasa</a>
 		<a href="index.php?rt=kontorler/fja">Kasino</a>
 		<a href="index.php?rt=kontorler/fja">Vaši listići</a>
 		<a href="index.php?rt=logout/logout">Odjavi se</a>
