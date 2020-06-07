@@ -116,6 +116,33 @@ class KladionicaService
 		return $arr;
 		
 	}
+	function dohvatiIznos($username)
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT iznos FROM Kladionica_Users WHERE username="' . $username .'"' );
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$row = $st->fetch();
+		
+		if( $row === false )
+			return null;
+		else
+			return $row['iznos'];
+	}
+	function promijeniIznos($username,$iznos)
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'UPDATE Kladionica_Users SET iznos=' . $iznos .'  WHERE username="' . $username .'"' );
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
 };
 
 ?>

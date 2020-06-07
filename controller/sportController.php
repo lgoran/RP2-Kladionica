@@ -8,7 +8,7 @@ class SportController
 		$ks = new KladionicaService();
 		$title = 'Sportska ponuda';
 		$sportList=$ks->dohvatiSportove();
-
+		$iznos=$ks->dohvatiIznos($_SESSION['user']);
 		$utakmice_po_sportovima=array();
 		for($i=0;$i<count($sportList);$i++)
 		{

@@ -1,5 +1,5 @@
 var tiket=[];
-$( document ).ready(function() { 
+$( document ).ready(function() {
     $("#uplaceni_iznos").on("input",function()
     {
         var str=$("#uplaceni_iznos").val();
