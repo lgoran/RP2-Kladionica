@@ -23,6 +23,8 @@ $( document ).ready(function() {
     $("button").on("click",function()
     {
         var botun_id=$(this).attr("id");
+        if(botun_id==="uplati")
+            return;
         var botun_html=$(this).html();
         var utakmica_id=0;
         for(var i=0;i<botun_id.length;i++)
@@ -61,7 +63,11 @@ $( document ).ready(function() {
             crtaj_listic();
     }
     )
-
+    $("#uplati").on("click",function()
+    {
+        //posalji tiket;
+        //skini pare;
+    })
     $("h2").on("click",function()
     {
         var id=$(this).attr("id");
