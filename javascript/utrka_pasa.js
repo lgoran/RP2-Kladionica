@@ -1,5 +1,8 @@
+var ulog;
+var radio_id;
+var stanje_racuna;
 $( document ).ready(function() {
-    var ulog;
+        stanje_racuna=parseFloat($("#stanje_racuna").html());
         crtaj();
         $("#canvas").css("position","absolute");
         $("#canvas").css("left","1000px");
@@ -27,12 +30,19 @@ $( document ).ready(function() {
         }
         $("#ulozi").on("click",function()
         {
-            $("#oklada").hide();
+            
             for(var i =1;i<=5;i++)
             { 
                 $( "#p"+ i ).css("text-indent","0px");
             }
-            ulog=parseInt($("#ulog").val());
+            ulog=parseFloat($("#ulog").val());
+            radio_id=parseInt($("input[name='odabir']:checked").attr("id")[3]);
+            if(stanje_racuna<ulog)
+            {
+                alert("Nemate dovoljno kredita");
+                return;
+            }
+            $("#oklada").hide();
             move_dogs();
         });
         function move_dogs() 
@@ -49,7 +59,7 @@ $( document ).ready(function() {
                     $("#pobjednik").html("Pobjednik pas "+i);
                     flag=true;
                     $("#oklada").show();
-                    //reguliraj iznos na racunu
+                    reguliraj_iznos(i,radio_id);
                     break;
                 }
             }
@@ -57,3 +67,33 @@ $( document ).ready(function() {
                 setTimeout( move_dogs, 10 ); 
         }
 });
+function reguliraj_iznos(pobjednik,odabrani)
+{
+    if(pobjednik===odabrani)
+    {
+        alert("Čestitamo! Osvojili ste "+(4.5*ulog)+" kredita.")
+        stanje_racuna+=3.5*ulog;
+    }
+    else
+    {
+        stanje_racuna-=ulog;
+    }
+    $("#stanje_racuna").html(stanje_racuna);
+    $.ajax(
+        {
+            url: "index.php?rt=utrka_pasa/update",
+            data:
+            {
+                stanje_racuna: stanje_racuna,
+            },
+            success: function( )
+            {
+                console.log("Uspiješan Ajax");
+            },
+            error: function( xhr, status )
+            {
+                if( status !== null )
+                    console.log( "Greška prilikom Ajax poziva: " + status );                
+            }
+        } );
+}
