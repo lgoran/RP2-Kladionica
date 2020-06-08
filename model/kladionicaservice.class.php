@@ -203,7 +203,51 @@ class KladionicaService
 
 		return $ListaTiketa;
 	}
+	function dohvatiZadnjiTiket()
+	{
+		try
+		{
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT MAX(id) FROM Kladionica_Tiketi' );
+			$st->execute();
 
+		}
+		catch( PDOException $e ) { exit( 'PDO error (dohvatiZadnjiTiket)' . $e->getMessage() ); }
+		$row = $st->fetch();
+		if( $row === false )
+			return null;
+		else
+			return $row['MAX(id)'];
+
+	}
+	function staviTiket($user_id,$uplaceni_iznos,$potencijalni_dobitak,$ukupna_kvota)
+	{
+		$db = DB::getConnection();
+		try
+		{
+			$st = $db->prepare( 'INSERT INTO Kladionica_Tiketi(user_id, uplaceni_iznos, moguci_dobitak, vrijeme_uplate, koeficijent)
+								VALUES (:id_user, :uplata, :dobitak, :vrijeme, :koeficijent)' );
+
+			$st->execute( array( 'id_user' => $user_id, 'uplata' => $uplaceni_iznos, 'dobitak' => $potencijalni_dobitak, 'vrijeme' => date("Y-m-d h:i:s"), 'koeficijent' => $ukupna_kvota ));
+		}
+		catch( PDOException $e ) { exit( "PDO error (staviTiket): " . $e->getMessage() ); }
+	}
+
+	function napraviRelaciju($id_tiket,$id_utakmica,$odabrani_ishod)
+	{
+		$db = DB::getConnection();
+		try 
+		{
+			$st = $db->prepare("INSERT INTO Kladionica_Relacija(id_tiket, id_utakmica, odabrani_ishod, konacni_ishod) 
+								VALUES (:id_tiket, :id_utakmica, :odabrani_ishod, :konacni_ishod)");
+
+			$st->execute(array('id_tiket' => $id_tiket, 'id_utakmica' => $id_utakmica, 'odabrani_ishod' => $odabrani_ishod, 'konacni_ishod' => '2'));
+		}
+		catch(PDOException $e)
+		{
+			exit("PDO error (napraviRelaciju): " . $e->getMessage());
+		}
+		}
 };
 
 ?>

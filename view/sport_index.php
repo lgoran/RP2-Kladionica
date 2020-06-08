@@ -37,6 +37,7 @@ for($j=0;$j<count($utakmice_po_sportovima);$j++)
 		}
 	echo '</table>';
 }
+
 ?>
 <script type="text/javascript" src="javascript/sport.js"></script>
 <?php require_once __DIR__ . '/_footer.php'; ?>
