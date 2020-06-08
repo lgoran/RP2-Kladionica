@@ -1,6 +1,5 @@
 <?php
 
-// Popunjavamo tablice u bazi "probnim" podacima.
 require_once __DIR__ . '/db.class.php';
 
 seed_table_utakmice();
@@ -13,8 +12,6 @@ function seed_table_utakmice()
 {
 	$db = DB::getConnection();
 
-	// Ubaci neke knjige u tablicu books.
-	// UoÄŤimo da ne treba specificirati id koji se automatski poveÄ‡a kod svakog ubacivanja.
 	try
 	{
 		$st = $db->prepare( 'INSERT INTO Kladionica_Utakmice(domaci, gosti, kvota1, kvotaX, kvota2, kvota1x, kvota2x, sport)
@@ -55,9 +52,9 @@ function seed_table_tiketi()
 		$st->execute( array( 'id_user' => 6, 'uplata' => 10.0, 'dobitak' => 120.0, 'vrijeme' => '2020-06-03 08:15:00', 'koeficijent' => 12.0) );
 		$st->execute( array( 'id_user' => 5, 'uplata' => 50.0, 'dobitak' => 1220.0, 'vrijeme' => '2020-06-03 10:20:30', 'koeficijent' => 24.5) );
 	}
-	catch( PDOException $e ) { exit( "PDO error (seed_table_loans): " . $e->getMessage() ); }
+	catch( PDOException $e ) { exit( "PDO error (seed_table_tiketi): " . $e->getMessage() ); }
 
-	echo "Ubacio knjige u tablicu books.<br />";
+	echo "Ubacio podatke u tablicu tiketi.<br />";
 }
 
 function seed_table_relacija() 
@@ -69,20 +66,22 @@ function seed_table_relacija()
         $st = $db->prepare("INSERT INTO Kladionica_Relacija(id_tiket, id_utakmica, odabrani_ishod, konacni_ishod) 
                             VALUES (:id_tiket, :id_utakmica, :odabrani_ishod, :konacni_ishod)");
 
-        $st->execute(array('id_tiket' => 1, 'id_utakmica' => 7, 'odabrani_ishod' => '2', 'konacni_ishod' => '2'));
-        $st->execute(array('id_tiket' => 1, 'id_utakmica' => 8, 'odabrani_ishod' => '1', 'konacni_ishod' => '1'));
-        $st->execute(array('id_tiket' => 1, 'id_utakmica' => 9, 'odabrani_ishod' => 'X', 'konacni_ishod' => '2'));
-        $st->execute(array('id_tiket' => 2, 'id_utakmica' => 11, 'odabrani_ishod' => 'X', 'konacni_ishod' => '1'));
-        $st->execute(array('id_tiket' => 2, 'id_utakmica' => 13, 'odabrani_ishod' => 'X', 'konacni_ishod' => '2'));
-        $st->execute(array('id_tiket' => 3, 'id_utakmica' => 8, 'odabrani_ishod' => 'X', 'konacni_ishod' => '1'));
-        $st->execute(array('id_tiket' => 3, 'id_utakmica' => 10, 'odabrani_ishod' => '1X', 'konacni_ishod' => '1'));
-        $st->execute(array('id_tiket' => 4, 'id_utakmica' => 10, 'odabrani_ishod' => '1', 'konacni_ishod' => '1'));
-        $st->execute(array('id_tiket' => 4, 'id_utakmica' => 12, 'odabrani_ishod' => '1', 'konacni_ishod' => '2'));
+        $st->execute(array('id_tiket' => 1, 'id_utakmica' => 1, 'odabrani_ishod' => '2', 'konacni_ishod' => '2'));
+        $st->execute(array('id_tiket' => 1, 'id_utakmica' => 2, 'odabrani_ishod' => '1', 'konacni_ishod' => '1'));
+        $st->execute(array('id_tiket' => 1, 'id_utakmica' => 3, 'odabrani_ishod' => 'X', 'konacni_ishod' => '2'));
+        $st->execute(array('id_tiket' => 2, 'id_utakmica' => 5, 'odabrani_ishod' => 'X', 'konacni_ishod' => '1'));
+        $st->execute(array('id_tiket' => 2, 'id_utakmica' => 7, 'odabrani_ishod' => 'X', 'konacni_ishod' => '2'));
+        $st->execute(array('id_tiket' => 3, 'id_utakmica' => 2, 'odabrani_ishod' => 'X', 'konacni_ishod' => '1'));
+        $st->execute(array('id_tiket' => 3, 'id_utakmica' => 4, 'odabrani_ishod' => '1X', 'konacni_ishod' => '1'));
+        $st->execute(array('id_tiket' => 4, 'id_utakmica' => 4, 'odabrani_ishod' => '1', 'konacni_ishod' => '1'));
+        $st->execute(array('id_tiket' => 4, 'id_utakmica' => 6, 'odabrani_ishod' => '1', 'konacni_ishod' => '2'));
     }
     catch(PDOException $e)
     {
         exit("PDO error (seed_table_relacija): " . $e->getMessage());
     }
+
+    echo "Ubacio podatke u tablicu relacija.<br />";
 }
 
 ?>
