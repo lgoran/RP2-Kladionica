@@ -11,6 +11,12 @@ class Grcki_lotoController
 		$title = 'Grčki loto';		
 		require_once __DIR__ . '/../view/grcki_loto.php';
 	}
+	public function update()
+	{
+		$stanje_racuna=$_GET["stanje_racuna"];
+		$ks = new KladionicaService();
+		$ks->promijeniIznos($_SESSION['user'],floatval($stanje_racuna));
+	}
 }; 
 
 ?>

@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/_header.php'; ?>
 
-    <header id = "h"></header>
+    <header id = "h">Stanje na računu: <span id="stanje_racuna"><?php echo $stanje;?></span></header>
     <input type="number" id="num" min="1"><button id="btn">Igraj</button> <br>
     <button id="nova">Nova igra</button>
     <button id="pravila">Vidi Pravila</button> <br>
