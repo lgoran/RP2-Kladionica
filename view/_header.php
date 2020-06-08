@@ -15,7 +15,7 @@
 		<a href="index.php?rt=grcki_loto/index">Grčki loto</a>
 		<a href="index.php?rt=utrka_pasa/index">Utrka pasa</a>
 		<a href="index.php?rt=kontorler/fja">Kasino</a>
-		<a href="index.php?rt=kontorler/fja">Vaši listići</a>
+		<a href="index.php?rt=listici/index">Vaši listići</a>
 		<a href="index.php?rt=logout/logout">Odjavi se</a>
 	</ul>
 	<hr>

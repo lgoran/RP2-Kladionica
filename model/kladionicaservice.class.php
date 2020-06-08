@@ -111,7 +111,7 @@ class KladionicaService
 		while( $row = $st->fetch() )
 		{
 			$arr[] = new Utakmica( $row['id'], $row['domaci'], $row['gosti'], $row['kvota1'], 
-					$row['kvotaX'], $row['kvota2'], $row['kvota1x'], $row['kvota2x'] );
+					$row['kvotaX'], $row['kvota2'], $row['kvota1x'], $row['kvota2x'], $row['sport'] );
 		}
 		return $arr;
 		
@@ -143,6 +143,67 @@ class KladionicaService
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
+
+	function getIdUserByUsername( $username ){
+
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT id FROM Kladionica_Users WHERE username=:uname' );
+			$st->execute( array( 'uname' => $username ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		if( $st->rowCount() !== 1){
+			$return_state = false;
+		}
+		else{
+			$row = $st->fetch();
+			return $row['id'];
+		}
+	}
+
+	function dohvatiListice($ID_User){
+
+		try
+		{
+            $db = DB::getConnection();
+            $st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID' );
+			$st1->execute( array( 'uID' => $ID_User ) );
+
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+		
+		$ListaTiketa = [];
+
+		while( $row1 = $st1->fetch() ){
+			$ID_Tiket = $row1['id'];
+
+			try
+			{
+				$db = DB::getConnection();
+				$st2 = $db->prepare( 'SELECT * FROM Kladionica_Relacija, Kladionica_Utakmice WHERE Kladionica_Relacija.id_tiket =:tID 
+																			AND Kladionica_Relacija.id_utakmica = Kladionica_Utakmice.id' );
+				$st2->execute( array( 'tID' => $ID_Tiket ) );
+
+			}
+			catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+			$ListaUtakmica = [];
+			$ListaOdabira = [];
+			while( $row2 = $st2->fetch() ){
+				$ListaUtakmica[] = new Utakmica( $row2['id'], $row2['domaci'], $row2['gosti'], $row2['kvota1'], $row2['kvotaX'], 
+													$row2['kvota2'], $row2['kvota1x'], $row2['kvota2x'], $row2['sport'] );
+				$ListaOdabira[] = $row2['odabrani_ishod']; 
+			}
+
+			$ListaTiketa[] = new Tiket( $row1['id'], $row1['user_id'], $row1['uplaceni_iznos'], $row1['moguci_dobitak'], 
+										$row1['vrijeme_uplate'], $row1['koeficijent'], $ListaUtakmica, $ListaOdabira );
+		}
+
+		return $ListaTiketa;
+	}
+
 };
 
 ?>

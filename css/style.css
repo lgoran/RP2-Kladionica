@@ -35,3 +35,20 @@ float: right;
 background-color: darkcyan;
 border: 1px solid black;
 }
+
+div.vas_tiket{
+border:1.5px solid black;
+}
+
+div.headerListica{
+border-bottom:1px solid black;
+}
+
+div.footerListica{
+border-top:1px solid black;
+}
+
+.utakmice_listic td{
+padding-left: 10px;
+padding-right: 10px;
+}

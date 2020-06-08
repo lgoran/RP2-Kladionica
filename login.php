@@ -71,12 +71,14 @@ if(isset($_POST['user']) && $_POST['user']!="" && isset($_POST['pw']) && $_POST[
     <title>Chat</title>
 </head>
 <body>
+<hr>
 <form action="index.php" method="POST">
-	Username:<input type="text" name="user"><br>
+	Username:<input type="text" name="user"><br><br>
 	Password:<input type="password" name="pw"><br>
-	<input type="submit" name="submit" value="Login"><br>
+	<input type="submit" name="submit" value="Login"><br><br>
 	Email: <input type="email" name="email"><br>	
 	<input type="submit" name="submit" value="Create">
 </form>
+<hr>
 </body>
 </html>
