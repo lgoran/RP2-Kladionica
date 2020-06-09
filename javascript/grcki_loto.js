@@ -147,7 +147,7 @@ function pokreni_igru(){
     var check = $('<input type="radio" id="' + broj_oznacenih +'" name="sist" checked>\
         <label for="'+broj_oznacenih+'">' + broj_oznacenih + '/' + broj_oznacenih +'</label><br>');
     $("#tekst").append(check);
-    var submit_button = $('<button id = "start_btn" onclick="igraj();">Pokreni igru!</button>')
+    var submit_button = $('<button id = "start_btn" style="background-color:darkorange; width:25%; font-size:1.2vw; padding:7px;" onclick="igraj();">Pokreni igru!</button>')
     $("#tekst").append(submit_button);
     $("#sistem").show();
 }

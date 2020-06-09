@@ -20,10 +20,10 @@ ul a:hover{
     box-shadow: blue 6px 6px 50px;
 }
 body{
-    /*background-image: url("../slike/background.jpg");
+    background-image:  linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%,rgba(255, 255, 255, 0.9) 100%), url("../slike/background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;*/
+    background-size: cover;
 }
 
 .tablica_utakmica{
@@ -79,6 +79,7 @@ padding-right: 10px;
     border:1px solid black;
     background-color: dimgray;
     color: white;
+    width: 12%;
 }
 .utrka_pasa_hr{
     margin-left: 0px;
