@@ -37,14 +37,39 @@ $( document ).ready(function() {
             }
             ulog=parseFloat($("#ulog").val());
             radio_id=parseInt($("input[name='odabir']:checked").attr("id")[3]);
+            if(isNaN(ulog) || ulog<=0)
+            {
+                alert("Niste unijeli iznos za klađenje!");
+                return;
+            }
             if(stanje_racuna<ulog)
             {
-                alert("Nemate dovoljno kredita");
+                alert("Nemate dovoljno kredita!");
                 return;
             }
             $("#oklada").hide();
             move_dogs();
         });
+        $("#ulog").on("input",function()
+        {
+            var str=$("#ulog").val();
+            if(isNaN(str))
+            {
+                $("#ulog").val(str.substring(0,str.length-1));
+                alert("Najmanji mogući ulog je 1!");
+                return;
+            }
+            else
+            {
+                if(parseFloat(str)<1)
+                {
+                    str="1";
+                    $("#ulog").val(1);
+                }
+                
+                $("#potencijalni_dobitak").html((parseFloat(str)*parseFloat($("#ukupna_kvota").html())).toFixed(3));
+            }
+        })
         function move_dogs() 
         {
             var flag=false;

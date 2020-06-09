@@ -1,12 +1,12 @@
 <?php require_once __DIR__ . '/_header.php'; ?>
 <div class="sport_tiket" id="sport_tiket">
-	<p style="text-align:center;font-weight: bold;">Vaš tiket</p><hr>
+	<p style="text-align:center;font-weight:bold;color:gold">Vaš tiket</p><hr>
 	<p id="odigrani_parovi"></p>
 	Stanje računa:<span id="stanje_racuna"><?php echo $iznos; ?></span><br>
-	<input type="text" name="uplaceni_iznos" id="uplaceni_iznos" value="2">
-	<button id="uplati">Odigraj tiket</button><br>
-	Ukupna kvota:<span id="ukupna_kvota">1</span><br>
-	Potencijalni dobitak:<span id="potencijalni_dobitak">2</span><br>
+	<input type="text" name="uplaceni_iznos" id="uplaceni_iznos" value="2" size="5">
+	<button id="uplati" style="background-color:darkorange;height:30px">Odigraj tiket</button><br>
+	ISPLATA:<span id="potencijalni_dobitak">2</span><br>
+	Tečaj:<span id="ukupna_kvota">1</span><br>
 	
 </div>
 <?php
