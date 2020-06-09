@@ -120,8 +120,8 @@ function nova_igra(){
 function pokreni_igru(){
     if (igra_se) return;
     var n = $("#num").val();
-    if (!n){
-        $( "#p" ).html("<b>Molimo unesite neki iznos.</b>");
+    if (n <= 0){
+        $( "#p" ).html("<b>Molimo unesite neki iznos veći od nule.</b>");
         return;
     }
     if (pressed.size < 1){
