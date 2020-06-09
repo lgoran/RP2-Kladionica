@@ -19,6 +19,8 @@ $( document ).ready(function() {
             
             $("#potencijalni_dobitak").html((parseFloat(str)*parseFloat($("#ukupna_kvota").html())).toFixed(3));
         }
+        if(str==="")
+            $("#potencijalni_dobitak").html(0);
     })
     $("button").on("click",function()
     {
@@ -79,9 +81,9 @@ $( document ).ready(function() {
         }
         var stanje_racuna=parseFloat($("#stanje_racuna").html());
         var uplaceni_iznos=parseFloat($("#uplaceni_iznos").val());
-        if(uplaceni_iznos<=0)
+        if(isNaN(uplaceni_iznos) || uplaceni_iznos<=0)
         {
-            alert("Nedovoljno velika uplata");
+            alert("Niste unijeli iznos za klađenje!");
             return;
         }
         if(stanje_racuna<uplaceni_iznos)
