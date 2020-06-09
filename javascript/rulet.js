@@ -2,20 +2,31 @@ $(document).ready(function () {
     Initialize();
     createTable();
     $("#roullet").click(markCell);
-    $("#start").click(igraj)
+    $("#start").click(function() {
+        if (uvjetiZaIgru() === false) 
+        {
+            $("#error").text("Morate postaviti zetone na plocu!");
+            return;
+        }
+        var ID = setInterval(startCounter, 25);
+        setTimeout(igraj, 3000, ID);
+    });
     $("#pravila").click(vidiPravila);
     $("#ulog").on("keypress", onlyNumbersInput);
-    $("#odznaci").click(resetiraj)
+    $("#odznaci").click(resetiraj);
 });
 
 var stanjeNaRacunu = 100; // trebat ce nesto iz sessiona
 var table;
 var canvas = $("#roullet").get(0);
 var ctx = canvas.getContext("2d");
+var c = document.getElementById("counter").getContext("2d");
 var trenutniUlog = 0;
+var counterVar = 0;
 
 function Initialize()
 {
+    counterVar = 0;
     trenutniUlog = 0;
     $("#error").text("");
     $("#krediti").text("Stanje na racunu: " + stanjeNaRacunu + " kredita");
@@ -107,6 +118,18 @@ function drawCoin(x, y, value)
     ctx.fillText(value, x * 50 + 25, y * 50 + 35);
 }
 
+function drawCounter()
+{
+    var grd = c.createRadialGradient(75, 75, 65, 75, 75, 75);
+    grd.addColorStop(0, "white");
+    grd.addColorStop(1, "black");
+    c.beginPath();
+    c.arc(75, 75, 75, 0, 2 * Math.PI);
+    c.fillStyle = grd;
+    c.fill();
+    
+}
+
 function getRowAndCol(x, y) {
     return {
         i: Math.floor(y / 50),
@@ -188,15 +211,13 @@ function vratiDobitak(izvuceniBroj)
     return 0;
 }
 
-function igraj()
+function igraj(ID)
 {
-    if (uvjetiZaIgru() === false) 
-    {
-        $("#error").text("Morate postaviti zetone na plocu!");
-        return;
-    }
+    stopCounter(ID);
 
     var izvuceniBroj = getRandomNumber();
+    drawCounter();
+    fillCounter(izvuceniBroj, "red");
     var dobitak = vratiDobitak(izvuceniBroj);
     if (dobitak === 0) 
     {
@@ -234,4 +255,24 @@ function resetiraj()
 {
     Initialize();
     createTable();
+}
+
+function fillCounter(counterVar, color) 
+{
+    c.font = "bold 90px Comic Sans MS";
+    c.textAlign = "center";
+    c.fillStyle = color;
+    c.fillText(counterVar.toString(), 75, 110);
+}
+
+function startCounter() 
+{
+    counterVar = (counterVar + 1) % 37;
+    drawCounter();
+    fillCounter(counterVar, "blue");
+}
+
+function stopCounter(ID)
+{
+    clearInterval(ID);
 }
