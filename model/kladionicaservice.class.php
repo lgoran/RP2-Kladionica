@@ -168,7 +168,7 @@ class KladionicaService
 		try
 		{
             $db = DB::getConnection();
-            $st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID' );
+            $st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID ORDER BY vrijeme_uplate DESC' );
 			$st1->execute( array( 'uID' => $ID_User ) );
 
 		}
@@ -191,14 +191,16 @@ class KladionicaService
 
 			$ListaUtakmica = [];
 			$ListaOdabira = [];
+			$ListaIshoda = [];
 			while( $row2 = $st2->fetch() ){
 				$ListaUtakmica[] = new Utakmica( $row2['id'], $row2['domaci'], $row2['gosti'], $row2['kvota1'], $row2['kvotaX'], 
 													$row2['kvota2'], $row2['kvota1x'], $row2['kvota2x'], $row2['sport'] );
 				$ListaOdabira[] = $row2['odabrani_ishod']; 
+				$ListaIshoda[] = $row2['konacni_ishod'];
 			}
 
 			$ListaTiketa[] = new Tiket( $row1['id'], $row1['user_id'], $row1['uplaceni_iznos'], $row1['moguci_dobitak'], 
-										$row1['vrijeme_uplate'], $row1['koeficijent'], $ListaUtakmica, $ListaOdabira );
+										$row1['vrijeme_uplate'], $row1['koeficijent'], $ListaUtakmica, $ListaOdabira, $ListaIshoda );
 		}
 
 		return $ListaTiketa;
