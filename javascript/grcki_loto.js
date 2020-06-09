@@ -14,7 +14,7 @@ $( document ).ready( function()
     var x1 = $('<button>X</button>').on("click", function(){
         $("#okvir").hide();
         igra_se = 0;
-    }).css("position","absolute").css("width","6%").css("height", "6%").css("font-size","100%").css("border","none")
+    }).css("position","absolute").css("width","6%").css("height", "6%").css("font-size","100%").css("border","none").css("border","2px solid black")
         .css("background-color","red").css("top","2%").css("right","1%").css("color","white").css("border-radius", "40%");
     var opis = $('<p id = "opis"></p>').css("position","center").css("color","white");
     okvir.append(x1);
@@ -29,7 +29,7 @@ $( document ).ready( function()
         $("#tekst").empty();
         $("#sistem").hide();
         igra_se = 0;
-    }).css("position","absolute").css("width","5%").css("height", "5%").css("font-size","100%").css("border","none")
+    }).css("position","absolute").css("width","5%").css("height", "5%").css("font-size","100%").css("border","none").css("border","2px solid black")
         .css("background-color","red").css("top","2%").css("right","1%").css("color","white").css("border-radius", "50%");;
     var tekst = $('<p id="tekst"></p><br>').css("padding","5%").css("font-size","1.3vw");
     sistem.append(x2);
@@ -164,6 +164,7 @@ function igraj(){
 
     $("#tekst").empty();
     $("#sistem").hide();
+    $("#p").html("");
 
     var n = $("#num").val();
     var c = document.getElementById("canvas");
@@ -209,21 +210,20 @@ function igraj(){
         }
         else if (arr.size == 20){
             clearInterval(id);
-            $("#p").html('<p>Pogodili ste ' + broj_pogodenih + ' od ' + pressed.size + ' brojeva.</p>');
+            //$("#p").html('<p>Pogodili ste ' + broj_pogodenih + ' od ' + pressed.size + ' brojeva.</p>');
             var rez = dobitak(broj_pogodenih, n, br_sistema);
             if (rez == 0){
                 novac -= n;
                 $( "#h" ).html("Stanje na računu: " + novac + " kredita.");
                 update_iznos(novac)
-                izgubljeno();
+                izgubljeno(broj_pogodenih);
             }
             else {
                 novac += rez;
                 $( "#h" ).html("Stanje na računu: " + novac + " kredita.");
                 update_iznos(novac)
-                dobiveno(rez);
+                dobiveno(rez,broj_pogodenih);
             }
-            igra_se = 0;
             return;
         }
         tocka.x+=100;
@@ -244,12 +244,14 @@ function dobitak(broj, ulog, br_sistema){
     }
     return parseFloat( rez.toFixed(2));
 }
-function izgubljeno(){
-    $("#opis").html("Izgubili ste!").css("font-size","3vw").css("padding", "20%");
+function izgubljeno(broj_pogodenih){
+    $("#opis").html("<b>Izgubili ste!</b><br>Pogodili ste " + broj_pogodenih + " od " + pressed.size + " brojeva.")
+            .css("font-size","2.3vw").css("padding-top", "23%");
     $("#okvir").show();
 }
-function dobiveno(iznos){
-    $("#opis").html("<b>Čestitamo!</b><br>Osvojili ste " + iznos + " kredita.").css("font-size","2.5vw").css("padding-top","15%");
+function dobiveno(iznos, broj_pogodenih){
+    $("#opis").html("<b>Čestitamo!</b><br>Pogodili ste " + broj_pogodenih + " od " + pressed.size + " brojeva.<br>Osvojili ste <b>" + iznos + "</b> kredita.")
+            .css("font-size","2vw").css("padding-top","21%");
     $("#okvir").show();
 }
 
