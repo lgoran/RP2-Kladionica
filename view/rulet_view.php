@@ -10,6 +10,7 @@
     <button type="reset" id="odznaci">Resetiraj</button>
     <br>
     <canvas id="roullet" width="650" height="250"></canvas>
+    <canvas id="counter" width="150" height="150"></canvas>
     <br>
     <br>
     <h3 id="error"></h4>
