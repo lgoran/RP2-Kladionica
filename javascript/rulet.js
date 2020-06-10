@@ -14,6 +14,7 @@ $(document).ready(function () {
     $("#pravila").click(vidiPravila);
     $("#ulog").on("keypress", onlyNumbersInput);
     $("#odznaci").click(resetiraj);
+    $("#exitButtonPravila").click(zatvoriPravila);
 });
 
 var stanjeNaRacunu = 100; // trebat ce nesto iz sessiona
@@ -26,6 +27,7 @@ var counterVar = 0;
 
 function Initialize()
 {
+    $("#divPravila").hide();
     counterVar = 0;
     trenutniUlog = 0;
     $("#error").text("");
@@ -235,11 +237,7 @@ function igraj(ID)
 
 function vidiPravila()
 {
-    alert("Rulet je jedna od najpopularnijih svjetskih igara na srecu. Igra se pomocu \
-            specijalnog kola koji se sastoji od 37 brojeva (0 - 36). Brojevi su naizmjence \
-            oznaceni crvenom i crnom bojom, osim nule koja je zelena. Prije nego što se kolo zavrti \
-            igrac postavlja ulog tako sto oznaci jedno ili vise mogucih polja. Ako zelite odznaciti polje, \
-            postavite njegov ulog na 0, a ukoliko zelite maknuti sve uloge, pritisnite Reset. Sretno!");
+    $("#divPravila").show();
 }
 
 function onlyNumbersInput(evt) 
@@ -275,4 +273,9 @@ function startCounter()
 function stopCounter(ID)
 {
     clearInterval(ID);
+}
+
+function zatvoriPravila()
+{
+    $("#divPravila").hide();
 }

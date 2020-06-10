@@ -2,6 +2,22 @@
     <div id="ruletDiv">
     <h3 id="krediti"></h3>
     <h4 id="trenutni_ulog"></h4>
+    <div id="divPravila">
+        <button id="exitButtonPravila">X </button><br><br>
+        Rulet je jedna od najpopularnijih svjetskih <br>
+        igara na srecu. Igra se pomocu specijalnog <br>
+        kola koji se sastoji od 37 brojeva (0 - 36). <br>
+        Brojevi su naizmjence oznaceni crvenom i <br>
+        crnom bojom, osim nule koja je zelena. <br>
+        Mogucnosti odabira polja su razne, od jednog <br>
+        broja, do odabira trecina ili polovina te boja. <br> 
+        Prije nego što se kolo zavrti igrac <br>
+        postavlja ulog tako sto oznaci jedno ili <br>
+        vise mogucih polja. Ako zelite odznaciti <br>
+        polje, postavite njegov ulog na 0, a ukoliko <br>
+        zelite maknuti sve uloge, pritisnite Reset. <br><br>
+        <b style="margin-left: 30%;">SRETNO!</b><br><br>
+    </div>
     <label for="ulog">Vas ulog:</label>
     <input type="number" min="1" id="ulog" value="2">
     <br>
