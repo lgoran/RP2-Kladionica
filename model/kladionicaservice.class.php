@@ -205,6 +205,119 @@ class KladionicaService
 
 		return $ListaTiketa;
 	}
+
+	function simuliraj_listic($ID_Tiket)
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM Kladionica_Relacija, Kladionica_Utakmice WHERE Kladionica_Relacija.id_tiket =:tID 
+																		AND Kladionica_Relacija.id_utakmica = Kladionica_Utakmice.id
+																		AND Kladionica_Relacija.konacni_ishod = \'-1\'' );
+			$st->execute( array( 'tID' => $ID_Tiket ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$dobitan = 1;
+		while( $row = $st->fetch() ){
+
+			$a = (float)$row['kvota1'];
+			$b = (float)$row['kvotaX'];
+			$c = (float)$row['kvota2'];
+
+			$max_broj = (int)((1/$a + 1/$b + 1/$c) * 1000);
+			$rezultat = rand(0, $max_broj);
+			if($rezultat < (int)(1000*(1/$a)))
+			{
+				$ishod_utakmice = '1';
+			}
+			else if($rezultat < (int)(1000*(1/$a + 1/$b)))
+			{
+				$ishod_utakmice = 'X';
+			}
+			else
+			{
+				$ishod_utakmice = '2';
+			}
+
+
+			//upisivanje rezultata u bazu
+			try
+			{
+				$st2 = $db->prepare( 'UPDATE Kladionica_Relacija SET konacni_ishod=\'' . $ishod_utakmice .'\'  WHERE id_tiket=:tID AND id_utakmica=:utakID' );
+				$st2->execute( array('tID' => $ID_Tiket, 'utakID' => $row['id_utakmica']) );
+			}
+			catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		}
+
+		return $dobitan;
+	}
+
+	function dohvati_moguci_dobitak($ID_Tiket)
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE Kladionica_Tiketi.id =:tID' );
+			$st->execute( array( 'tID' => $ID_Tiket ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$row = $st->fetch();
+		$rez = $row['moguci_dobitak'];
+		
+		return $rez;
+	}
+
+	function provjeri_listic($ID_Tiket)
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM Kladionica_Relacija, Kladionica_Utakmice WHERE Kladionica_Relacija.id_tiket =:tID 
+																		AND Kladionica_Relacija.id_utakmica = Kladionica_Utakmice.id' );
+			$st->execute( array( 'tID' => $ID_Tiket ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$dobitan = 1;
+		while( $row = $st->fetch() ){
+
+			if( strlen( $row['odabrani_ishod'] ) === 1 )
+			{
+				if( $row['odabrani_ishod'] === $row['konacni_ishod'] ){
+					//pogodak
+				}
+				else{
+					//promasaj
+					$dobitan = 0;
+					break;
+				}
+			}
+			else
+			{
+				//ostaju samo 1X i 2X kao mogucnosti
+				if($row['konacni_ishod'] === 'X'){
+					//pogodak u oba slucaja
+				}
+				else{
+					//krajnji rezultat je 1 ili 2
+					if( substr($row['odabrani_ishod'], 0, 1) === $row['konacni_ishod'] ){
+						//pogodak
+					}
+					else{
+						//promasaj
+						$dobitan = 0;
+						break;
+					}
+				}
+			}
+		}
+
+		return $dobitan;
+	}
+
 	function dohvatiZadnjiTiket()
 	{
 		try
@@ -243,7 +356,7 @@ class KladionicaService
 			$st = $db->prepare("INSERT INTO Kladionica_Relacija(id_tiket, id_utakmica, odabrani_ishod, konacni_ishod) 
 								VALUES (:id_tiket, :id_utakmica, :odabrani_ishod, :konacni_ishod)");
 
-			$st->execute(array('id_tiket' => $id_tiket, 'id_utakmica' => $id_utakmica, 'odabrani_ishod' => $odabrani_ishod, 'konacni_ishod' => '2'));
+			$st->execute(array('id_tiket' => $id_tiket, 'id_utakmica' => $id_utakmica, 'odabrani_ishod' => $odabrani_ishod, 'konacni_ishod' => '-1'));
 		}
 		catch(PDOException $e)
 		{

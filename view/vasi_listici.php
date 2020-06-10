@@ -1,7 +1,16 @@
 <?php require_once __DIR__ . '/_header.php'; ?>
 
+<?php 
+    if(isset($poruka))
+    {
+        echo '<h3>' . $poruka . '</h3><hr><br>';
+    }
+?>
+
 <?php
 foreach($ListaTiketa as $tiket){
+    $postoji_promasaj = 0;
+    $cekamo_rezultat = 0;
     echo '<hr> <br>';
     echo '<div class="vas_tiket">' . 
             '<h3> Kladionica </h3>' .
@@ -24,6 +33,8 @@ foreach($ListaTiketa as $tiket){
                      //prvo provjera je li utakmica uopce odigrana, oznaka '-1' ako nije
                      if(($tiket->konacni_ishodi)[$counter] === '-1')
                      {
+                        //nasli smo neodigranu utakmicu
+                        $cekamo_rezultat = 1;
                         echo '<img class="oznaka_na_listicu" src="slike/neodigrano.png" alt="?" >';
                      }
                      //tu provjeravamo je li odigrana utakmica pogodena ili ne
@@ -35,6 +46,7 @@ foreach($ListaTiketa as $tiket){
                         }
                         else{
                             //promasaj
+                            $postoji_promasaj = 1;
                             echo '<img class="oznaka_na_listicu" src="slike/promasaj.png" alt="-" >';
                         }
                      }
@@ -53,13 +65,26 @@ foreach($ListaTiketa as $tiket){
                             }
                             else{
                                 //promasaj
+                                $postoji_promasaj = 1;
                                 echo '<img class="oznaka_na_listicu" src="slike/promasaj.png" alt="-" >';
                             }
                         }
-                     }
+                     }/*
                      echo '</td>' .
                      '<td>' . ($tiket->konacni_ishodi)[$counter] . '</td>' .
                      
+                     '</tr>';*/
+                     echo '</td>' .
+                        '<td>';
+                        if(($tiket->konacni_ishodi)[$counter] === '-1')
+                        {
+                            echo '-';
+                        }
+                        else
+                        {
+                            echo ($tiket->konacni_ishodi)[$counter];
+                        }
+                        echo '</td>' .
                      '</tr>';
                 $counter++;
             }
@@ -67,9 +92,33 @@ foreach($ListaTiketa as $tiket){
             '<div class="footerListica">'.
                 'Uplaćeni iznos: ' . $tiket->uplaceni_iznos . ' kn <br>' . "\n" . 
                 'Koeficijent: ' . $tiket->koeficijent . '<br>' . "\n" . 
-                'Mogući dobitak : ' . $tiket->moguci_dobitak . ' kn <br>' . "\n" . 
-            '</div>'.
-         '</div>';
+                'Mogući dobitak : ' . $tiket->moguci_dobitak . ' kn <br>' . "\n" ;
+                if($postoji_promasaj === 1)
+                {
+                    //gubitni listic
+                    echo '<p style="color:red; font-size:20px; margin-bottom:0;">Gubitni listić</p>';
+                }
+                else if($cekamo_rezultat === 1)
+                {
+                    //potrebno simulirati utakmice
+                    echo '<p style="color:blue; font-size:20px; margin-bottom:0;">Nisu odigrane sve utakmice</p>';
+                    echo '<form class="simulacija_utakmica" action="index.php?rt=listici/simuliraj" method="post">' .
+                         '<input type="hidden" name="listic_ID" value="' . $tiket->id . '">' .
+                         '<button type="submit">Simuliraj listić</button>' .
+                         '</form>';
+
+                }
+                else
+                {
+                    //listic je dobitan
+                    echo '<p style="color:green; font-size:20px; margin-bottom:0;">Dobitni listić</p>';
+                }
+            echo '</div>';
+            
+            
+            
+
+         echo '</div>';
 }
 
 if( count($ListaTiketa) === 0 ){
