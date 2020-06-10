@@ -9,6 +9,7 @@
 <body>
 	<h1>Kladionica</h1>
 	<?php if(isset($_SESSION['user'])) echo 'Dobrodošli @' . $_SESSION['user'].'!'; ?>
+	<span id="user_iznos" style="float:right;">100 kredita</span>
 	<hr>
 	<ul>
 		<a href="index.php?rt=sport/index">Sport</a>

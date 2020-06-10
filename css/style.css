@@ -40,6 +40,8 @@ float: right;
 color: white;
 background-color:dimgray;
 border: 1px solid black;
+margin-right: 5%;
+padding: 20px;
 }
 
 div.vas_tiket{
@@ -80,6 +82,8 @@ padding-right: 10px;
     background-color: dimgray;
     color: white;
     width: 12%;
+    padding: 20px;
+    margin-right: 5%;
 }
 .utrka_pasa_hr{
     margin-left: 0px;

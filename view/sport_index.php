@@ -4,7 +4,7 @@
 	<p id="odigrani_parovi"></p>
 	Stanje računa:<span id="stanje_racuna"><?php echo $iznos; ?></span><br>
 	<input type="text" name="uplaceni_iznos" id="uplaceni_iznos" placeholder="Vaš ulog" size="5">
-	<button id="uplati" style="background-color:darkorange;height:30px">Odigraj tiket</button><br>
+	<button id="uplati" style="background-color:darkorange;height:30px">Odigraj tiket</button><br><br>
 	ISPLATA:<span id="potencijalni_dobitak"></span><br>
 	Tečaj:<span id="ukupna_kvota">1</span><br>
 	
