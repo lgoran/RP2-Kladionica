@@ -24,10 +24,7 @@ if(isset($_POST['user']) && $_POST['user']!="" && isset($_POST['pw']) && $_POST[
 		}
 		foreach( $st->fetchAll() as $row )
 		{
-			if (!$row['has_registered'] && $row['registration_sequence'] != $_POST['reg_kod']){
-				echo "Niste unijeli ispravan registracijski kod!";
-				break;
-			}
+		
 			if( password_verify( $pw, $row['password_hash'] ) )
 			{
 				echo "Uspijesno logiranje";
@@ -58,8 +55,7 @@ $_SESSION['x'] = 0;
 		Username:<input type="text" name="user"><br><br>
 		Password:<input type="password" name="pw"><br>
 		<input type="submit" name="submit" value="Login"><br><br>
-		Ukoliko nemate korisnički račun, otvorite ga <a href="register.php">ovdje</a><br><br>
-		Registracijski kod (samo za nove korisnike):<input type="text" name="reg_kod">
+		Ukoliko nemate korisnički račun, otvorite ga <a href="register.php">ovdje</a><br>
 	</div>
 </form>
 

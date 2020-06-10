@@ -27,9 +27,11 @@ body{
 }
 #unos_forma {
     width: 30%;
-    height: 200px;
+    min-width: 300px;
+    height: fit-content;
+    min-height: fit-content;
     margin-top: 10%;
-    margin-left: 35%;
+    margin-left: 30%;
     text-align: center;
     background-color: blanchedalmond;
     border: solid 3px black;
