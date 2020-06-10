@@ -17,6 +17,7 @@
 		<a href="index.php?rt=utrka_pasa/index">Utrka pasa</a>
 		<a href="index.php?rt=rulet/index">Kasino</a>
 		<a href="index.php?rt=listici/index">Vaši listići</a>
+		<a href="index.php?rt=uplata_na_racun/index">Uplata na račun</a>
 		<a href="index.php?rt=logout/logout">Odjavi se</a>
 	</ul>
 	<hr>
