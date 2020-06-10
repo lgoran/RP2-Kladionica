@@ -19,8 +19,10 @@ function create_table_users()
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'username varchar(20) NOT NULL,' .
             'password_hash varchar(255) NOT NULL,' .
-            'email varchar(50) NOT NULL,'.
-            'iznos float NOT NULL)'
+			'email varchar(50) NOT NULL,'.
+			'has_registered int(10) DEFAULT NULL,' .
+			'iznos float NOT NULL,' .
+			'registration_sequence varchar(20) NOT NULL)'
 		);
 
 		$st->execute();
