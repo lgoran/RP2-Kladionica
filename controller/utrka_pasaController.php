@@ -15,6 +15,7 @@ class Utrka_pasaController
 		$stanje_racuna=$_GET["stanje_racuna"];
 		$ks = new KladionicaService();
 		$ks->promijeniIznos($_SESSION['user'],floatval($stanje_racuna));
+		$_SESSION['iznos']=$stanje_racuna;
 	}
 }; 
 

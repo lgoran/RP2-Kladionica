@@ -95,6 +95,7 @@ $( document ).ready(function() {
         {
             stanje_racuna-=uplaceni_iznos;
         }
+        $("#stanje_racuna").html(stanje_racuna);
         var ukupna_kvota=$("#ukupna_kvota").html();
         var potencijalni_dobitak=$("#potencijalni_dobitak").html();
         $.ajax(

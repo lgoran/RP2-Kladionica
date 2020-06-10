@@ -103,6 +103,7 @@ function reguliraj_iznos(pobjednik,odabrani)
     {
         stanje_racuna-=ulog;
     }
+    $("#user_iznos").html(stanje_racuna+" kredita");
     $("#stanje_racuna").html(stanje_racuna);
     $.ajax(
         {

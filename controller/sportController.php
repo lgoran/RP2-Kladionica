@@ -35,7 +35,7 @@ class SportController
 			$odabrani_ishod=$tiket[$i][2];
 			$ks->napraviRelaciju($id_tiket,intval($id_utakmica),$odabrani_ishod);
 		}
-		
+		$_SESSION['iznos']=$stanje_racuna;
 	}
 }; 
 

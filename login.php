@@ -13,7 +13,7 @@ if(isset($_POST['user']) && $_POST['user']!="" && isset($_POST['pw']) && $_POST[
 	if($_POST['submit']=="Login")
 	{
 		try{
-			$st = $db->prepare( 'SELECT password_hash, has_registered, registration_sequence FROM Kladionica_Users WHERE username=:username' );
+			$st = $db->prepare( 'SELECT password_hash, has_registered, registration_sequence, iznos FROM Kladionica_Users WHERE username=:username' );
 			$st->execute( array( 'username' => $user ) );
 		}catch(PDOException $e){
 			echo $e;
@@ -32,6 +32,7 @@ if(isset($_POST['user']) && $_POST['user']!="" && isset($_POST['pw']) && $_POST[
 			{
 				echo "Uspijesno logiranje";
 				$_SESSION['user']=$user;
+				$_SESSION['iznos']=$row['iznos'];
 				$_SESSION['logged_in']='true';
 				header( 'Location: index.php' );
 			}
