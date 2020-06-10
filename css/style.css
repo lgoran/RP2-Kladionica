@@ -25,6 +25,16 @@ body{
     background-attachment: fixed;
     background-size: cover;
 }
+#unos_forma {
+    width: 30%;
+    height: 200px;
+    margin-top: 10%;
+    margin-left: 35%;
+    text-align: center;
+    background-color: blanchedalmond;
+    border: solid 3px black;
+    padding: 3%;
+}
 
 .tablica_utakmica{
 border-collapse:collapse;
