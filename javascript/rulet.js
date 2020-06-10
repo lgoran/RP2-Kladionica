@@ -15,6 +15,7 @@ $(document).ready(function () {
     $("#ulog").on("keypress", onlyNumbersInput);
     $("#odznaci").click(resetiraj);
     $("#exitButtonPravila").click(zatvoriPravila);
+    $("#roullet").on("contextmenu", removeCoin);
 });
 
 var stanjeNaRacunu = 100; // trebat ce nesto iz sessiona
@@ -56,56 +57,59 @@ function drawZero() {
     ctx.fillText("0", 25, 135);
 }
 
-function drawNumbers() {
-    for (var i = 0; i < 3; i++) {
-        for (var j = 1; j <= 12; j++) {
-            ctx.beginPath();
-            if (j % 2 === 0) ctx.fillStyle = "black";
-            else ctx.fillStyle = "red";
-            ctx.fillRect(j * 50, i * 50, 49, 49);
+function drawNumber(i, j) {
+    ctx.beginPath();
+    if (j % 2 === 0) ctx.fillStyle = "black";
+    else ctx.fillStyle = "red";
+    ctx.fillRect(j * 50, i * 50, 49, 49);
 
-            ctx.font = "bold 25px Comic Sans MS";
-            ctx.textAlign = "center";
-            ctx.fillStyle = "white";
-            ctx.fillText((i * 12 + j).toString(), j * 50 + 25, i * 50 + 35);
-        }
-    }
+    ctx.font = "bold 25px Comic Sans MS";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    ctx.fillText((i * 12 + j).toString(), j * 50 + 25, i * 50 + 35);
+}
+
+function drawNumbers() {
+    for (var i = 0; i < 3; i++)
+        for (var j = 1; j <= 12; j++)
+            drawNumber(i, j);
+}
+
+function drawThird(i) {
+    ctx.beginPath();
+    ctx.fillStyle = "green";
+    ctx.fillRect(50 + i * 200, 150, 199, 49);
+
+    ctx.font = "bold 25px Comic Sans MS";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    ctx.fillText((i * 12 + 1).toString() + " - " + (i * 12 + 12).toString(), 150 + i * 200, 185);
 }
 
 function drawThirds() {
     for (var i = 0; i < 3; i++) {
-        ctx.beginPath();
-        ctx.fillStyle = "green";
-        ctx.fillRect(50 + i * 200, 150, 199, 49);
-
-        ctx.font = "bold 25px Comic Sans MS";
-        ctx.textAlign = "center";
-        ctx.fillStyle = "white";
-        ctx.fillText((i * 12 + 1).toString() + " - " + (i * 12 + 12).toString(), 150 + i * 200, 185);
+        drawThird(i);
     }
 }
 
-function drawHalfs() {
-    for (var i = 0; i < 4; i++) {
-        ctx.beginPath();
-        if (i == 1)
-            ctx.fillStyle = "red";
-        else if (i == 2)
-            ctx.fillStyle = "black";
-        else
-            ctx.fillStyle = "green";
-        ctx.fillRect(50 + i * 150, 200, 149, 49);
+function drawHalf(i, fillColor, value) 
+{
+    ctx.beginPath();
+    ctx.fillStyle = fillColor;
+    ctx.fillRect(50 + i * 150, 200, 149, 49);
 
-        ctx.font = "bold 25px Comic Sans MS";
-        ctx.textAlign = "center";
-        ctx.fillStyle = "white";
-        if (i == 0 || i == 3)
-            ctx.fillText(((i % 2) * 18 + 1).toString() + " - " + ((i % 2) * 18 + 18).toString(), 125 + i * 150, 235);
-        else if (i == 1)
-            ctx.fillText("RED", 125 + i * 150, 235);
-        else
-            ctx.fillText("BLACK", 125 + i * 150, 235);
-    }
+    ctx.font = "bold 25px Comic Sans MS";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    ctx.fillText(value, 125 + i * 150, 235);
+    
+}
+
+function drawHalfs() {
+    drawHalf(0, "green", "1 - 18");
+    drawHalf(1, "red", "RED");
+    drawHalf(2, "black", "BLACK");
+    drawHalf(3, "green", "19 - 36");
 }
 
 function drawCoin(x, y, value) 
@@ -118,6 +122,31 @@ function drawCoin(x, y, value)
     ctx.textAlign = "center";
     ctx.fillStyle = "purple";
     ctx.fillText(value, x * 50 + 25, y * 50 + 35);
+}
+
+function removeCoin(event) 
+{
+    var mousePosition = getMousePosition(event);
+    var indexes = getRowAndCol(mousePosition.x, mousePosition.y);
+    var mark = markTable(indexes.i, indexes.j);
+    if (table[mark.index] === 0) return;
+    table[mark.index] = 0;
+    if (mark.index === 0) 
+        drawZero();
+    else if (mark.index >= 1 && mark.index <= 36)
+        drawNumber(mark.j, mark.i);
+    else if (mark.index >= 37 && mark.index <= 39)
+        drawThird(mark.index % 37);
+    else if (mark.index === 40)
+        drawHalf(0, "green", "1 - 18");
+    else if (mark.index === 41)
+        drawHalf(1, "red", "RED");
+    else if (mark.index === 42)
+        drawHalf(2, "black", "BLACK");
+    else if (mark.index === 43)
+        drawHalf(3, "green", "19 - 36");
+
+    return false;
 }
 
 function drawCounter()
