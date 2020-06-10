@@ -130,6 +130,8 @@ function removeCoin(event)
     var indexes = getRowAndCol(mousePosition.x, mousePosition.y);
     var mark = markTable(indexes.i, indexes.j);
     if (table[mark.index] === 0) return;
+    trenutniUlog -= table[mark.index];
+    $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita");
     table[mark.index] = 0;
     if (mark.index === 0) 
         drawZero();
@@ -197,7 +199,7 @@ function markCell(event)
     table[mark.index] = pom; 
     trenutniUlog += pom;
     
-    $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita")
+    $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita");
        
 }
 

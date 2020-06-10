@@ -13,9 +13,9 @@
         broja, do odabira trecina ili polovina te boja. <br> 
         Prije nego što se kolo zavrti igrac <br>
         postavlja ulog tako sto oznaci jedno ili <br>
-        vise mogucih polja. Ako zelite odznaciti <br>
-        polje, postavite njegov ulog na 0, a ukoliko <br>
-        zelite maknuti sve uloge, pritisnite Reset. <br><br>
+        vise mogucih polja. Oznaceno polje mozete <br>
+        odznaciti desnim klikom, a ukoliko zelite <br>
+        maknuti sve uloge, pritisnite Resetiraj. <br><br>
         <b style="margin-left: 30%;">SRETNO!</b><br><br>
     </div>
     <label for="ulog">Vas ulog:</label>
