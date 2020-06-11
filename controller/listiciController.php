@@ -11,6 +11,22 @@ class ListiciController
         
         $ID_User = $ks->getIdUserByUsername( $_SESSION['user'] );
         $ListaTiketa = $ks->dohvatiListice($ID_User);
+
+        //koliko na pocetku prikazujemo listica
+        $broj_listica = 2;
+
+        if(isset($_POST['broj_listica_za_prikaz']))
+        {
+            $br_t = $_POST['broj_listica_za_prikaz'];
+            if($br_t === '15+'){
+                //oznaka da nemamo ogranicenja, sve listice prikazujemo
+                $broj_listica = -1;
+            }     
+            else{
+                $broj_listica = (int)$br_t;
+            }
+        }
+        $_SESSION['broj_listica'] = $broj_listica;
         
 		require_once __DIR__ . '/../view/vasi_listici.php';
     }

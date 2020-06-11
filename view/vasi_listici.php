@@ -7,8 +7,32 @@
     }
 ?>
 
+<form action="index.php?rt=listici/index" method="post">
+  <label for="broj_listica_za_prikaz">Koliko listića želite prikazati?</label>
+  <select name="broj_listica_za_prikaz" id="broj_listica_za_prikaz">
+    <option selected="selected" disabled="disabled">...</option>
+    <option value="3">3</option>
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15+">15+</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Prikaži listiće">
+</form>
+
 <?php
+
+$brojac_listica = 0;
+$broj_listica = $_SESSION['broj_listica'];
+
 foreach($ListaTiketa as $tiket){
+
+    if($broj_listica >= 0 && $brojac_listica >= $broj_listica){
+        //prikazali smo sve listice koje je korisnik htio
+        break;
+    }
+    $brojac_listica++;
+
     $postoji_promasaj = 0;
     $cekamo_rezultat = 0;
     echo '<hr> <br>';

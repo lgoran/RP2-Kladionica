@@ -168,7 +168,7 @@ class KladionicaService
 		try
 		{
             $db = DB::getConnection();
-            $st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID ORDER BY vrijeme_uplate DESC' );
+            $st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID ORDER BY vrijeme_uplate DESC, id DESC' );
 			$st1->execute( array( 'uID' => $ID_User ) );
 
 		}
