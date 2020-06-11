@@ -192,12 +192,13 @@ function markCell(event)
     var indexes = getRowAndCol(mousePosition.x, mousePosition.y);
     var mark = markTable(indexes.i, indexes.j);
     console.log(mark);
-    drawCoin(mark.i, mark.j, pom);
-    if (table[mark.index] !== 0)
+    //drawCoin(mark.i, mark.j, pom);
+    /* if (table[mark.index] !== 0)
     {
         trenutniUlog -= table[mark.index];
-    }
-    table[mark.index] = pom; 
+    } */
+    table[mark.index] += pom;
+    drawCoin(mark.i, mark.j, table[mark.index]); 
     trenutniUlog += pom;
     
     $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita");
