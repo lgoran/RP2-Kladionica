@@ -18,7 +18,7 @@ $(document).ready(function () {
     $("#roullet").on("contextmenu", removeCoin);
 });
 
-var stanjeNaRacunu = 100; // trebat ce nesto iz sessiona
+var stanjeNaRacunu; // trebat ce nesto iz sessiona
 var table;
 var canvas = $("#roullet").get(0);
 var ctx = canvas.getContext("2d");
@@ -31,8 +31,9 @@ function Initialize()
     $("#divPravila").hide();
     counterVar = 0;
     trenutniUlog = 0;
+    stanjeNaRacunu = parseFloat($("#stanje_racuna").html());
     $("#error").text("");
-    $("#krediti").text("Stanje na racunu: " + stanjeNaRacunu + " kredita");
+    //$("#krediti").text("Stanje na racunu: " + stanjeNaRacunu + " kredita");
     $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita");
     $("#ulog").prop("max", stanjeNaRacunu.toString());
     table = new Array(44);
@@ -263,6 +264,10 @@ function igraj(ID)
         alert("Izvuceni broj je " + izvuceniBroj.toString() + ". Dobili ste " + (dobitak - trenutniUlog).toString() + " kredita.");
     }
 
+    $("#user_iznos").html(stanjeNaRacunu + " kredita");
+    $("#stanje_racuna").html(stanjeNaRacunu);
+
+    updateIznos();
     resetiraj();
 }
 
@@ -309,4 +314,25 @@ function stopCounter(ID)
 function zatvoriPravila()
 {
     $("#divPravila").hide();
+}
+
+function updateIznos()
+{
+    $.ajax(
+        {
+            url: "index.php?rt=rulet/update",
+            data:
+            {
+                stanje_racuna: stanjeNaRacunu,
+            },
+            success: function( )
+            {
+                console.log("Uspiješan Ajax");
+            },
+            error: function( xhr, status )
+            {
+                if( status !== null )
+                    console.log( "Greška prilikom Ajax poziva: " + status );                
+            }
+        } );
 }

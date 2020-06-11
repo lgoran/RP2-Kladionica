@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/_header.php'; ?>
     <div id="ruletDiv">
-    <h3 id="krediti"></h3>
+    <h3 id="krediti">Stanje na racunu: <span id="stanje_racuna"><?php echo $iznos;?></span> kredita</h3>
     <h4 id="trenutni_ulog"></h4>
     <div id="divPravila">
         <button id="exitButtonPravila">X </button><br><br>
