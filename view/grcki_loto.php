@@ -5,7 +5,7 @@
     <button id="nova">Nova igra</button>
     <button id="pravila">Vidi Pravila</button> <br>
     <br /><br />
-    <canvas width="1050" height="330" style="border: none" id="canvas"></canvas>
+    <canvas width="1500" height="500" style="border: none" id="canvas"></canvas>
     <p id = "p" style="font-size:1.3vw;"></p><br>
     <script type="text/javascript" src="javascript/grcki_loto.js"></script>
     

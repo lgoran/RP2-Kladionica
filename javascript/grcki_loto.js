@@ -14,8 +14,8 @@ $( document ).ready( function()
     var x1 = $('<button>X</button>').on("click", function(){
         $("#okvir").hide();
         igra_se = 0;
-    }).css("position","absolute").css("width","6%").css("height", "6%").css("font-size","100%").css("border","none").css("border","2px solid black")
-        .css("background-color","red").css("top","2%").css("right","1%").css("color","white").css("border-radius", "40%");
+    }).css("position","absolute").css("width","fit-content").css("height", "fit-content").css("font-size","28px").css("border","none").css("border","2px solid black")
+        .css("background-color","red").css("top","2%").css("right","1%").css("color","white").css("border-radius", "50%");
     var opis = $('<p id = "opis"></p>').css("position","center").css("color","white");
     okvir.append(x1);
     okvir.append(opis);
@@ -23,13 +23,13 @@ $( document ).ready( function()
 
     //služi za ispis odabira sistema
     var sistem = $('<div id ="sistem"></div>');
-    sistem.css("position","absolute").css("top","20%").css("left","30%").css("height","55%").css("border","4px solid #00b386")
+    sistem.css("position","absolute").css("top","20%").css("left","30%").css("height","fit-content").css("border","4px solid #00b386")
         .css("width","40%").css("text-align","center").css("background-color", "#00ffbf").hide();
     var x2 = $('<button id="X">X</button>').on("click", function(){
         $("#tekst").empty();
         $("#sistem").hide();
         igra_se = 0;
-    }).css("position","absolute").css("width","5%").css("height", "5%").css("font-size","100%").css("border","none").css("border","2px solid black")
+    }).css("position","absolute").css("width","fit-content").css("height", "fit-content").css("font-size","28px").css("border","none").css("border","2px solid black")
         .css("background-color","red").css("top","2%").css("right","1%").css("color","white").css("border-radius", "50%");;
     var tekst = $('<p id="tekst"></p><br>').css("padding","5%").css("font-size","1.3vw");
     sistem.append(x2);
@@ -62,10 +62,10 @@ function oznaci() {
     var ctx = this.getContext( "2d" );
     var rect = this.getBoundingClientRect();
     var x = event.clientX - rect.left, y = event.clientY - rect.top;
-    var size = rect.width / 40,i,j;
-    if (y > 2*size) return;
-    for (i = 0; i < 2; i++){
-        for (j = 0; j < 40; j++)
+    var size = rect.height / 10 - 1,i,j;
+    if (x > 8*size) return;
+    for (i = 0; i < 10; i++){
+        for (j = 0; j < 8; j++)
             if (y < ((i+1)*size + 2) && x < (j+1)*size){
                 var row = i;
                 var col = j;
@@ -74,7 +74,7 @@ function oznaci() {
             }
         if (flag) break;
     }
-    var num = (i == 0) ? (j+1) : (j+1 + 40);
+    var num = i * 8 + j + 1;
     if (pressed.has(num)){
         pressed.delete(num);
         draw_canvas();
@@ -91,20 +91,24 @@ function draw_canvas(){
     var rect = $("#canvas").get(0).getBoundingClientRect();
     ctx.lineWidth = "3";
     ctx.textAlign = "center";
-    var size = rect.width / 40;
+    var size = rect.height / 10 - 1;
     var num = 1;
-    for (var i = 0; i < 2; i++)
-        for (var j = 0; j < 40; j++){
+    for (var i = 0; i < 10; i++)
+        for (var j = 0; j < 8; j++){
             if (pressed.has(num)) ctx.fillStyle = "#ff6666";
             else ctx.fillStyle = "azure";
 
             ctx.strokeRect(j*size,i*size + 2, size, size);
             ctx.fillRect(j*size,i*size + 2, size, size);
             ctx.fillStyle = "black";
-            ctx.font = "15px Arial";
+            ctx.font = "22px Arial";
             ctx.fillText(num, j*size + size/2, i*size + 2*size/3 + 2);
             num++;
         }
+    ctx.moveTo(0,0);
+    ctx.lineTo(0,492);
+    ctx.stroke();
+    
 }
 function nova_igra(){
     if (igra_se) return;
@@ -114,7 +118,7 @@ function nova_igra(){
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var rect = c.getBoundingClientRect();
-    ctx.clearRect(0, 3*rect.width/40, canvas.width, canvas.height);
+    ctx.clearRect(8 * rect.height / 10 ,0, canvas.width, canvas.height);
 }
 
 function pokreni_igru(){
@@ -170,12 +174,12 @@ function igraj(){
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var rect = c.getBoundingClientRect();
-    ctx.clearRect(0, 3*rect.width/40, canvas.width, canvas.height);
+    ctx.clearRect(8 * rect.height / 10 ,0, canvas.width, canvas.height);
 
    // $( "#h" ).html("Stanje na računu: " + novac + " kredita.");
     var tocka = {
-        x: rect.left + 50, 
-        y: rect.top - 200
+        x: rect.left + 470, 
+        y: rect.top - 160
     };
     var r = 40, arr = new Set();
     broj_pogodenih = 0;
@@ -204,7 +208,7 @@ function igraj(){
         ctx.stroke();
         ctx.strokeText(broj.toString(), tocka.x, tocka.y+10);
         if (arr.size == 10){
-            tocka.x = rect.left + 50;
+            tocka.x = rect.left + 470;
             tocka.y += 100;
             return;
         }
