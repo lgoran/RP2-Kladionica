@@ -16,7 +16,7 @@ class Grcki_lotoController
 		$stanje_racuna=$_GET["stanje_racuna"];
 		$ks = new KladionicaService();
 		$ks->promijeniIznos($_SESSION['user'],floatval($stanje_racuna));
-		$_SESSION['iznos']=$stanje_racuna;
+		$_SESSION['iznos']=floatval($stanje_racuna);
 	}
 }; 
 
