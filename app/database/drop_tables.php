@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/db.class.php';
 
-drop_table_users();
+//drop_table_users();
 drop_table_utakmice();
 drop_table_tiketi();
 drop_table_relacija();
