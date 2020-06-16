@@ -9,9 +9,6 @@ class ListiciController
         $iznos=$ks->dohvatiIznos($_SESSION['user']);
         $title = 'Vaši listići';		
         
-        $ID_User = $ks->getIdUserByUsername( $_SESSION['user'] );
-        $ListaTiketa = $ks->dohvatiListice($ID_User);
-
         //koliko na pocetku prikazujemo listica
         $broj_listica = 2;
 
@@ -27,6 +24,9 @@ class ListiciController
             }
         }
         $_SESSION['broj_listica'] = $broj_listica;
+
+        $ID_User = $ks->getIdUserByUsername( $_SESSION['user'] );
+        $ListaTiketa = $ks->dohvatiListice($ID_User, $_SESSION['broj_listica']);
         
 		require_once __DIR__ . '/../view/vasi_listici.php';
     }
@@ -56,7 +56,7 @@ class ListiciController
 
         $title = 'Vaši listići';
         $ID_User = $ks->getIdUserByUsername( $_SESSION['user'] );
-        $ListaTiketa = $ks->dohvatiListice($ID_User);
+        $ListaTiketa = $ks->dohvatiListice($ID_User, $_SESSION['broj_listica']);
         
 		require_once __DIR__ . '/../view/vasi_listici.php';
     }

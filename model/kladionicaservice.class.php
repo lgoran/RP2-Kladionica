@@ -163,13 +163,21 @@ class KladionicaService
 		}
 	}
 
-	function dohvatiListice($ID_User){
+	function dohvatiListice($ID_User, $broj_listica){
 
 		try
 		{
-            $db = DB::getConnection();
-            $st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID ORDER BY vrijeme_uplate DESC, id DESC' );
-			$st1->execute( array( 'uID' => $ID_User ) );
+			$db = DB::getConnection();
+			if($broj_listica !== -1)
+			{
+				$st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID ORDER BY vrijeme_uplate DESC, id DESC LIMIT ' . $broj_listica );
+			}
+			else
+			{
+				$st1 = $db->prepare( 'SELECT * FROM Kladionica_Tiketi WHERE user_id=:uID ORDER BY vrijeme_uplate DESC, id DESC' );
+			}
+					
+			$st1->execute( array( 'uID' => $ID_User) );
 
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
