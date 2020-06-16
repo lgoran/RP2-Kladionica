@@ -7,9 +7,9 @@ require_once __DIR__ . '/app/database/db.class.php';
 $_SESSION['x'] = 1;
 if( isset( $_POST['username'] ) )
 {
-	?><script>console.log("doslo je");</script><?php
     //prvo provjeri jesu li sva polja upisana
-    if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) || !isset( $_POST['email'] )  || $_POST['username'] == "")
+	if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) || !isset( $_POST['email'] )  
+		|| $_POST['username'] == "" || $_POST['password'] == "" )
 	{
         header('Location: index.php?i=1');
     }
@@ -20,7 +20,7 @@ if( isset( $_POST['username'] ) )
     }
     else
 	{
-		// Provjeri jel već postoji taj korisnik u bazi
+		// Provjeri jel veÄ‡ postoji taj korisnik u bazi
 		$db = DB::getConnection();
 
 		try
@@ -28,19 +28,20 @@ if( isset( $_POST['username'] ) )
 			$st = $db->prepare( 'SELECT * FROM Kladionica_Users WHERE username=:username' );
 			$st->execute( array( 'username' => $_POST['username'] ) );
 		}
-		catch( PDOException $e ) { exit( 'Greška u bazi: ' . $e->getMessage() ); }
-
-		if( $st->rowCount() !== 0 )
+		catch( PDOException $e ) { exit( 'GreĹˇka u bazi: ' . $e->getMessage() ); }
+		
+		if( $st->fetch() !== false )
 		{
-			// Taj user u bazi već postoji
+			// Taj user u bazi veÄ‡ postoji
 			header( 'Location: index.php?i=3' );
+			exit();
 		}
 
 		// Dakle sad je napokon sve ok.
 		// Dodaj novog korisnika u bazu. Prvo mu generiraj random string od 10 znakova za registracijski link.
 		$reg_seq = '';
 		for( $i = 0; $i < 10; ++$i )
-			$reg_seq .= chr( rand(0, 25) + ord( 'a' ) ); // Zalijepi slučajno odabrano slovo
+			$reg_seq .= chr( rand(0, 25) + ord( 'a' ) ); // Zalijepi sluÄŤajno odabrano slovo
 
 		try
 		{
@@ -54,12 +55,12 @@ if( isset( $_POST['username'] ) )
                                  'iznos' => floatval(100), 
 				                 'reg_seq'  => $reg_seq ) );
 		}
-		catch( PDOException $e ) { exit( 'Greška u bazi: ------------->' . $e->getMessage() ); }
+		catch( PDOException $e ) { exit( 'GreĹˇka u bazi: ------------->' . $e->getMessage() ); }
 
-		// Sad mu još pošalji mail
+		// Sad mu joĹˇ poĹˇalji mail
 		$to       = $_POST['email'];
 		$subject  = 'Registracijski mail';
-		$message  = 'Poštovani ' . $_POST['username'] . "!\nZa dovršetak registracije kliknite na sljedeći link: ";
+		$message  = 'PoĹˇtovani ' . $_POST['username'] . "!\nZa dovrĹˇetak registracije kliknite na sljedeÄ‡i link: ";
         $message .= 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/new_user.php?niz=' . $reg_seq . "\n";
 		$headers  = 'From: rp2@studenti.math.hr' . "\r\n" .
 		            'Reply-To: rp2@studenti.math.hr' . "\r\n" .
@@ -68,7 +69,7 @@ if( isset( $_POST['username'] ) )
 		$isOK = mail($to, $subject, $message, $headers);
 
 		if( !$isOK )
-            exit( 'Greška: ne mogu poslati mail. (Pokrenite na rp2 serveru.)' );
+            exit( 'GreĹˇka: ne mogu poslati mail. (Pokrenite na rp2 serveru.)' );
         
         header( 'Location: index.php?i=4' );
     }
@@ -83,18 +84,18 @@ if( isset( $_POST['username'] ) )
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<form action="index.php" method="POST">
+<form action="register.php" method="POST">
 	<div id="unos_forma">
-        Odaberite korisničko ime:
+        Odaberite korisniÄŤko ime:
 		<input type="text" name="username" />
 		<br />
 		Odaberite lozinku:
 		<input type="password" name="password" />
 		<br />
-		Vaša mail-adresa:
+		VaĹˇa mail-adresa:
 		<input type="text" name="email" />
 		<br />
-        <button type="submit" value="stvori">Stvori korisnički račun!</button><br /><br>
+        <button type="submit" value="stvori">Stvori korisniÄŤki raÄŤun!</button><br /><br>
         Za povratak nazad kliknite <a href="login.php">ovdje</a>
 	</div>
 </form>
