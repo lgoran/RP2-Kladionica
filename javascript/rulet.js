@@ -5,7 +5,7 @@ $(document).ready(function () {
     $("#start").click(function() {
         if (uvjetiZaIgru() === false) 
         {
-            $("#error").text("Morate postaviti zetone na plocu!");
+            $("#error").text("Morate postaviti žetone na ploču!");
             return;
         }
         var ID = setInterval(startCounter, 25);
@@ -34,7 +34,7 @@ function Initialize()
     stanjeNaRacunu = parseFloat($("#stanje_racuna").html());
     $("#error").text("");
     //$("#krediti").text("Stanje na racunu: " + stanjeNaRacunu + " kredita");
-    $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita");
+    $("#trenutni_ulog").text("Trenutno stanje na ploči: " + trenutniUlog + " kredita");
     $("#ulog").prop("max", stanjeNaRacunu.toString());
     table = new Array(44);
     for (var i = 0; i < 44; i++)
@@ -132,7 +132,7 @@ function removeCoin(event)
     var mark = markTable(indexes.i, indexes.j);
     if (table[mark.index] === 0) return;
     trenutniUlog -= table[mark.index];
-    $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita");
+    $("#trenutni_ulog").text("Trenutno stanje na ploči: " + trenutniUlog + " kredita");
     table[mark.index] = 0;
     if (mark.index === 0) 
         drawZero();
@@ -183,9 +183,14 @@ function getMousePosition(event)
 function markCell(event)
 {
     var pom = Number ($("#ulog").val() );
-    if (pom < 0 || pom > stanjeNaRacunu || trenutniUlog > stanjeNaRacunu || trenutniUlog + pom > stanjeNaRacunu)
+    if (pom <= 0)
     {
-        $("#error").text("Nemate dovoljno kredita na racunu!");
+        $("#error").text("Morate postaviti barem jedan žeton na ploču!");
+        return;
+    }
+    if (pom > stanjeNaRacunu || trenutniUlog > stanjeNaRacunu || trenutniUlog + pom > stanjeNaRacunu)
+    {
+        $("#error").text("Nemate dovoljno kredita na računu!");
         return;
     }
     var mousePosition = getMousePosition(event);
@@ -201,7 +206,7 @@ function markCell(event)
     drawCoin(mark.i, mark.j, table[mark.index]); 
     trenutniUlog += pom;
     
-    $("#trenutni_ulog").text("Trenutno stanje na ploci: " + trenutniUlog + " kredita");
+    $("#trenutni_ulog").text("Trenutno stanje na ploči: " + trenutniUlog + " kredita");
        
 }
 
@@ -257,12 +262,12 @@ function igraj(ID)
     if (dobitak === 0) 
     {
         stanjeNaRacunu -= trenutniUlog;
-        alert("Izvuceni broj je " + izvuceniBroj.toString() + ". Izgubili ste.");
+        alert("Izvučeni broj je " + izvuceniBroj.toString() + ". Izgubili ste.");
     }
     else
     {
         stanjeNaRacunu = stanjeNaRacunu + dobitak - trenutniUlog;
-        alert("Izvuceni broj je " + izvuceniBroj.toString() + ". Dobili ste " + (dobitak - trenutniUlog).toString() + " kredita.");
+        alert("Izvučeni broj je " + izvuceniBroj.toString() + ". Dobili ste " + (dobitak - trenutniUlog).toString() + " kredita.");
     }
 
     $("#user_iznos").html(stanjeNaRacunu + " kredita");
