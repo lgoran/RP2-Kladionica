@@ -109,12 +109,14 @@ function draw_canvas(){
             ctx.fillText(num, j*size + size/2, i*size + 2*size/3 + 2);
             num++;
         }
+    ctx.beginPath();
     ctx.moveTo(0,0);
     ctx.lineTo(0,492);
     ctx.stroke();
 
-    crtaj_pozadinu();
+    //crtaj_pozadinu();
 }
+/*
 //za crtanje pozadine na kojoj izlaze brojevi
 function crtaj_pozadinu(){
     var ctx = $("#canvas").get(0).getContext("2d");
@@ -123,7 +125,7 @@ function crtaj_pozadinu(){
     ctx.fillStyle = "#f2f2f2";
     ctx.strokeRect(size * 8 + 10,3 * size - 20 , 1050, 240);
     ctx.fillRect(size * 8 + 10,3 * size - 20, 1050, 240);
-}
+}*/
 //brise sve kad se stisne nova igra
 function nova_igra(){
     if (igra_se) return;
@@ -134,7 +136,7 @@ function nova_igra(){
     var ctx = c.getContext("2d");
     var rect = c.getBoundingClientRect();
     ctx.clearRect(8 * rect.height / 10 ,0, canvas.width, canvas.height);
-    crtaj_pozadinu();
+    //crtaj_pozadinu();
 }
 //implementacija igra kad se stisne button Igraj
 function pokreni_igru(){
@@ -196,10 +198,10 @@ function igraj(){
     var ctx = c.getContext("2d");
     var rect = c.getBoundingClientRect();
     ctx.clearRect(8 * rect.height / 10 ,0, canvas.width, canvas.height);
-    crtaj_pozadinu();
+    //crtaj_pozadinu();
 
     var tocka = {
-        x: rect.left + 470, 
+        x: rect.left + 480, 
         y: rect.top - 160
     };
     var r = 40, arr = new Set(); //Za spremanje brojeva koji su izašli
@@ -226,13 +228,14 @@ function igraj(){
         ctx.arc(tocka.x, tocka.y, r, 0, 2 * Math.PI);
         ctx.fillStyle = colors[Math.floor((broj - 1)/10)];
         ctx.fill();
+        console.log("arc");
         ctx.lineWidth = 3;
         ctx.strokeStyle = "black";
         ctx.stroke();
         ctx.strokeText(broj.toString(), tocka.x, tocka.y+10);
 
         if (arr.size == 10){     //nakon 10og broja pređi u novi red             
-            tocka.x = rect.left + 470;
+            tocka.x = rect.left + 480;
             tocka.y += 100;
             return;
         }
@@ -240,6 +243,8 @@ function igraj(){
             clearInterval(id);
             //$("#p").html('<p>Pogodili ste ' + broj_pogodenih + ' od ' + pressed.size + ' brojeva.</p>');
             var rez = dobitak(broj_pogodenih, n, br_sistema);
+            rez = rez.toFixed(2);
+            rez = parseFloat(rez);
             if (rez == 0){
                 novac -= n;
                 $( "#h" ).html("Stanje na računu: " + novac + " kredita.");
@@ -254,7 +259,8 @@ function igraj(){
                 update_iznos(novac)
                 dobiveno(rez,broj_pogodenih);
             }
-            return;
+            arr.clear();
+            
         }
         tocka.x+=100;
     }

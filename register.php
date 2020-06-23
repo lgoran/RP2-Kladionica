@@ -86,16 +86,16 @@ if( isset( $_POST['username'] ) )
 <body>
 <form action="register.php" method="POST">
 	<div id="unos_forma">
-        Odaberite korisniÄŤko ime:
+        Odaberite korisničko ime:
 		<input type="text" name="username" />
 		<br />
 		Odaberite lozinku:
 		<input type="password" name="password" />
 		<br />
-		VaĹˇa mail-adresa:
+		Vaša mail-adresa:
 		<input type="text" name="email" />
 		<br />
-        <button type="submit" value="stvori">Stvori korisniÄŤki raÄŤun!</button><br /><br>
+        <button type="submit" value="stvori">Stvori korisnički račun!</button><br /><br>
         Za povratak nazad kliknite <a href="login.php">ovdje</a>
 	</div>
 </form>
