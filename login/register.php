@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__ . '/app/database/db.class.php';
+require_once __DIR__ . '/../app/database/db.class.php';
 
 $_SESSION['x'] = 1;
 if( isset( $_POST['username'] ) )
@@ -61,7 +61,7 @@ if( isset( $_POST['username'] ) )
 		$to       = $_POST['email'];
 		$subject  = 'Registracijski mail';
 		$message  = 'PoĹˇtovani ' . $_POST['username'] . "!\nZa dovrĹˇetak registracije kliknite na sljedeÄ‡i link: ";
-        $message .= 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/new_user.php?niz=' . $reg_seq . "\n";
+        $message .= 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/login/new_user.php?niz=' . $reg_seq . "\n";
 		$headers  = 'From: rp2@studenti.math.hr' . "\r\n" .
 		            'Reply-To: rp2@studenti.math.hr' . "\r\n" .
 		            'X-Mailer: PHP/' . phpversion();
@@ -84,7 +84,7 @@ if( isset( $_POST['username'] ) )
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<form action="register.php" method="POST">
+<form action="index.php" method="POST">
 	<div id="unos_forma">
         Odaberite korisničko ime:
 		<input type="text" name="username" />
@@ -96,7 +96,7 @@ if( isset( $_POST['username'] ) )
 		<input type="text" name="email" />
 		<br />
         <button type="submit" value="stvori">Stvori korisnički račun!</button><br /><br>
-        Za povratak nazad kliknite <a href="login.php">ovdje</a>
+        Za povratak nazad kliknite <a href="index.php?i=5">ovdje</a>
 	</div>
 </form>
 
