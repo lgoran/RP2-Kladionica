@@ -6,6 +6,7 @@ require_once __DIR__ . '/utakmice.class.php';
 require_once __DIR__ . '/tiket.class.php';
 //require_once __DIR__ . '/sveostaleklasedodatiovako.class.php';
 
+//Imenovanje funkcija u ovoj klasi je takvo da se bar okvirno zna o cemu se radi u samoj funkciji.
 class KladionicaService
 {
 	function getUserById( $id )
@@ -163,6 +164,8 @@ class KladionicaService
 		}
 	}
 
+	//Dohvacamo sve listice odredenog korisnika. Varijabla broj_listica sluzi kao ogranicenje koliko listica zelimo dohvatiti iz baze podataka.
+	//Listice spremamo u strukturu Tiket, koja se malo razlikuje od nacina spremanja u bazi (radi jednostavnosti kasnijeg koristenja).
 	function dohvatiListice($ID_User, $broj_listica){
 
 		try
@@ -197,6 +200,9 @@ class KladionicaService
 			}
 			catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
+			//Radi jednostavnosti kasnijeg pristupa podacima, promijenili smo malo ideju prikaza listica nego sto je to slucaj u bazi podataka.
+			//Ideja je u tri liste, na odgovarajucim indeksima, cuvati strukturu Utakmica, te odabir korisnika, tj na koji se ishod kladio, te 
+			//u trecoj listi imati pravi ishod utakmice. Sve se to sprema u strukturu Tiket.
 			$ListaUtakmica = [];
 			$ListaOdabira = [];
 			$ListaIshoda = [];
@@ -214,6 +220,7 @@ class KladionicaService
 		return $ListaTiketa;
 	}
 
+	//Funkcija koja simulira jedan neodigrani listic, te ishode pohranjuje u bazi podataka.
 	function simuliraj_listic($ID_Tiket)
 	{
 		try
@@ -229,10 +236,13 @@ class KladionicaService
 		$dobitan = 1;
 		while( $row = $st->fetch() ){
 
+			//Dohvacamo koliki su koeficijenti za odgovarajuce ishode, te pomocu njih racunamo vjerojatnosti dogadaja pobjeda domacina/nerjeseno/poraz domacina.
 			$a = (float)$row['kvota1'];
 			$b = (float)$row['kvotaX'];
 			$c = (float)$row['kvota2'];
 
+			//Ideja: ako je koeficijent dogadaja a, tada je njegova vjerojatnost dogadaja 1/a. Igru simuliramo tako da generiramo broj
+			//iz intervala koji se lako podijeli u omjeru vjerojatnosti dogadaja 1/X/2.
 			$max_broj = (int)((1/$a + 1/$b + 1/$c) * 1000);
 			$rezultat = rand(0, $max_broj);
 			if($rezultat < (int)(1000*(1/$a)))
@@ -278,6 +288,7 @@ class KladionicaService
 		return $rez;
 	}
 
+	//Funkcija koja provjerava je li zadani listic dobitan. Vraca 1 ako je, inace vrati 0.
 	function provjeri_listic($ID_Tiket)
 	{
 		try
