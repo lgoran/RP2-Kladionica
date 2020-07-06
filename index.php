@@ -33,11 +33,7 @@ if(isset($_SESSION['logged_in']))
 }
 //SESSION['x'] = 1 kad je otvoren prozor za registraciju, 0 kad je za login
 else if (isset($_SESSION['x']) && $_SESSION['x'] == 1){
-	/*if (!isset($_GET['i'])){
-		echo 'Uspješna registracija!';
-		require_once __DIR__ . '/login.php';
-		exit();
-	}*/
+	//preko GET saljemo vrijednost koja određuje sto se tocno dogodilo i sto ispisati
 	if (isset($_GET['i']) && $_GET['i'] == '1')
 		echo 'Trebate unijeti korisničko ime, lozinku i e-mail adresu.';
 	else if (isset($_GET['i']) && $_GET['i'] == '2')
@@ -58,6 +54,7 @@ else if (isset($_SESSION['x']) && $_SESSION['x'] == 1){
 	require_once __DIR__ . '/login/register.php';
 }
 else {
+	//ako je k=1 znaci da smo kliknuli za prelazak na prozor za registraciju
 	if (isset($_GET['k']) && $_GET['k'] == '1'){ 
 		require_once __DIR__ . '/login/register.php';
 	}

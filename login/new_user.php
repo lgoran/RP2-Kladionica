@@ -5,6 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/../app/database/db.class.php';
 
+//mora preko GET bit poslan niz od 10 znakova
 if( !isset( $_GET['niz'] ) || !preg_match( '/^[a-z]{10}$/', $_GET['niz'] ) )
     exit( 'Nešto ne valja s nizom.' );
     

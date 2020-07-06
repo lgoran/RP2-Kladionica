@@ -11,11 +11,13 @@ $( document ).ready( function()
     var okvir = $('<div id ="okvir"></div>');
     okvir.css("position","absolute").css("top","20%").css("left","30%").css("height","60%").css("border","4px solid #00ff00")
         .css("width","40%").css("text-align","center").css("background-color", "#006622").hide();
+    //stvori button X za zatvoriti prozor   
     var x1 = $('<button>X</button>').on("click", function(){
         $("#okvir").hide();
         igra_se = 0;
     }).css("position","absolute").css("width","fit-content").css("height", "fit-content").css("font-size","28px").css("border","none").css("border","2px solid black")
         .css("background-color","red").css("top","2%").css("right","1%").css("color","white").css("border-radius", "50%");
+    //mjesto za ispis teksta
     var opis = $('<p id = "opis"></p>').css("position","center").css("color","white");
     okvir.append(x1);
     okvir.append(opis);
@@ -42,8 +44,9 @@ var igra_se = 0;  //oznaka da je igra u tijeku
 var novac = stanje_racuna=parseFloat($("#stanje_racuna").html());  //iznos na racunu igraca
 var colors = ["#0066ff", "red", "#00FF7F", "yellow", "magenta", "#FF8C00", "cyan","grey","white"]
 var pressed = new Set();  //skup brojeva koje je korisnik kliknuo
-var broj_pogodenih;  
+var broj_pogodenih;  //broji koliko ih je korisnik pogodio
 
+//pokazi okvir s pravilima
 function vidi_pravila(){
     if (igra_se) return;
     igra_se = 1;
@@ -77,7 +80,9 @@ function oznaci() {
         if (flag) break;
     }
     var num = i * 8 + j + 1;
+    //num je iznos kliknutog broja
     if (pressed.has(num)){
+        //izbaci ako se vec nalazi medu kliknutima
         pressed.delete(num);
         draw_canvas();
     }
@@ -97,6 +102,8 @@ function draw_canvas(){
     ctx.textAlign = "center";
     var size = rect.height / 10 - 1;
     var num = 1;
+    
+    //nacrtaj plocu s brojevima
     for (var i = 0; i < 10; i++)
         for (var j = 0; j < 8; j++){
             if (pressed.has(num)) ctx.fillStyle = "#ff6666";
@@ -113,19 +120,8 @@ function draw_canvas(){
     ctx.moveTo(0,0);
     ctx.lineTo(0,492);
     ctx.stroke();
-
-    //crtaj_pozadinu();
 }
-/*
-//za crtanje pozadine na kojoj izlaze brojevi
-function crtaj_pozadinu(){
-    var ctx = $("#canvas").get(0).getContext("2d");
-    var rect = $("#canvas").get(0).getBoundingClientRect();
-    var size = rect.height / 10 - 1;
-    ctx.fillStyle = "#f2f2f2";
-    ctx.strokeRect(size * 8 + 10,3 * size - 20 , 1050, 240);
-    ctx.fillRect(size * 8 + 10,3 * size - 20, 1050, 240);
-}*/
+
 //brise sve kad se stisne nova igra
 function nova_igra(){
     if (igra_se) return;
@@ -136,9 +132,9 @@ function nova_igra(){
     var ctx = c.getContext("2d");
     var rect = c.getBoundingClientRect();
     ctx.clearRect(8 * rect.height / 10 ,0, canvas.width, canvas.height);
-    //crtaj_pozadinu();
+
 }
-//implementacija igra kad se stisne button Igraj
+//implementacija igre kad se stisne button Igraj
 function pokreni_igru(){
     if (igra_se) return;
     var n = $("#num").val();
@@ -155,11 +151,13 @@ function pokreni_igru(){
         $( "#p" ).html("<b>Nemate toliko kredita.</b>");
         return;
     }
+    //postavi da je igra u tijeku, da se ne mogu stiskati buttoni i brojevi
     igra_se = 1;
     $("#tekst").html('Odaberite sistem koji želite igrati<br><br>');
     var broj_oznacenih = pressed.size;
     var start;
 
+    // start je minimalan broj u sistemu
     if (broj_oznacenih >= 9) start = 4;
     else if (broj_oznacenih >= 6) start = 3;
     else start = 2;
@@ -173,6 +171,7 @@ function pokreni_igru(){
     var check = $('<input type="radio" id="' + broj_oznacenih +'" name="sist" checked>\
         <label for="'+broj_oznacenih+'">' + broj_oznacenih + '/' + broj_oznacenih +'</label><br>');
     $("#tekst").append(check);
+    //stvori button koji pokrece igru
     var submit_button = $('<button id = "start_btn" style="background-color:darkorange; width:25%; font-size:1.2vw; padding:7px;" onclick="igraj();">Pokreni igru!</button>')
     $("#tekst").append(submit_button);
     $("#sistem").show();
@@ -183,6 +182,7 @@ function igraj(){
 
     var radios = document.getElementsByName('sist');
     var br_sistema;
+    //odredi izabrani sistem
     for (var i = 0, length = radios.length; i < length; i++) 
         if (radios[i].checked)
             if (radios[i].value == "on")
@@ -193,13 +193,14 @@ function igraj(){
     $("#sistem").hide();
     $("#p").html("");
 
+    //ocisti sve prije crtanja
     var n = $("#num").val();
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var rect = c.getBoundingClientRect();
     ctx.clearRect(8 * rect.height / 10 ,0, canvas.width, canvas.height);
-    //crtaj_pozadinu();
 
+    //tocka predstavlja koordinate krugova s brojevima
     var tocka = {
         x: rect.left + 480, 
         y: rect.top - 160
@@ -208,7 +209,7 @@ function igraj(){
     broj_pogodenih = 0;
     ctx.font = "30px Arial";
     ctx.textAlign = "center";
-    var id = setInterval(crtaj, 100); //Svakih 0.1 sekunde izbaci broj (trebalo bi biti barem 1 sek ali ovako će oduzeti manje vremena)
+    var id = setInterval(crtaj, 300); //Svakih 0.1 sekunde izbaci broj (trebalo bi biti barem 1 sek ali ovako će oduzeti manje vremena)
     
     function crtaj(){
         //odaberi broj koji će izaći
@@ -241,11 +242,12 @@ function igraj(){
         }
         else if (arr.size == 20){ //gotova igra
             clearInterval(id);
-            //$("#p").html('<p>Pogodili ste ' + broj_pogodenih + ' od ' + pressed.size + ' brojeva.</p>');
             var rez = dobitak(broj_pogodenih, n, br_sistema);
             rez = rez.toFixed(2);
             rez = parseFloat(rez);
+            //rez predstavlja igracev dobitak
             if (rez == 0){
+                //igrac je izgubio
                 novac -= n;
                 $( "#h" ).html("Stanje na računu: " + novac + " kredita.");
                 $("#user_iznos").html(novac+" kredita");
@@ -253,6 +255,7 @@ function igraj(){
                 izgubljeno(broj_pogodenih);
             }
             else {
+                //igrac je dobio
                 novac += parseFloat( rez.toFixed(2));
                 $( "#h" ).html("Stanje na računu: " + novac + " kredita.");
                 $("#user_iznos").html(novac+" kredita");
@@ -281,11 +284,13 @@ function dobitak(broj, ulog, br_sistema){
     }
     return parseFloat( rez.toFixed(2));
 }
+//ispisuje gubitnicki tekst
 function izgubljeno(broj_pogodenih){
     $("#opis").html("<b>Izgubili ste!</b><br>Pogodili ste " + broj_pogodenih + " od " + pressed.size + " brojeva.")
             .css("font-size","2.3vw").css("padding-top", "23%");
     $("#okvir").show();
 }
+//ispisuje dobitnicki tekst
 function dobiveno(iznos, broj_pogodenih){
     $("#opis").html("<b>Čestitamo!</b><br>Pogodili ste " + broj_pogodenih + " od " + pressed.size + " brojeva.<br>Osvojili ste <b>" + iznos + "</b> kredita.")
             .css("font-size","2vw").css("padding-top","21%");
