@@ -13,6 +13,7 @@
 for($j=0;$j<count($utakmice_po_sportovima);$j++)
 {
 	$utakmiceList=$utakmice_po_sportovima[$j];
+	//ispis skupine sportova
 	$naziv_sporta=$sportList[$j];
 	if($naziv_sporta==='kosarka')
 		$naziv_sporta='Ko&#353arka';
@@ -21,6 +22,7 @@ for($j=0;$j<count($utakmice_po_sportovima);$j++)
 	else if($naziv_sporta==='Nogomet')
 		$naziv_sporta='Nogomet';
 	echo '<h2 id="sport' . $j . '">'. $naziv_sporta . '(' . count($utakmiceList) .')</h2>';
+	//ispis tablice odredenog sporta
 	echo '<table class="tablica_utakmica" id="tabla' . $j . '">';
 		if(count($utakmiceList)!=0)
 		{

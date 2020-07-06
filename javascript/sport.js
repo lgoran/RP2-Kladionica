@@ -1,5 +1,7 @@
 var tiket=[];
 $( document ).ready(function() {
+
+     //reguliranje inputa usera za iznos uloga
     $("#uplaceni_iznos").on("input",function()
     {
         var str=$("#uplaceni_iznos").val();
@@ -22,6 +24,8 @@ $( document ).ready(function() {
         if(str==="")
             $("#potencijalni_dobitak").html(0);
     })
+
+    //klik na botun ishoda neke od utakmica
     $("button").on("click",function()
     {
         var botun_id=$(this).attr("id");
@@ -70,10 +74,9 @@ $( document ).ready(function() {
             crtaj_listic();
     }
     )
+    //klik na botun uplati - regulacija stanja racuna
     $("#uplati").on("click",function()
     {
-        //posalji tiket;
-        //skini pare;
         if(tiket.length===0)
         {
             alert("Niste odabrali niti jedan par");
@@ -98,6 +101,8 @@ $( document ).ready(function() {
         $("#stanje_racuna").html(stanje_racuna);
         var ukupna_kvota=$("#ukupna_kvota").html();
         var potencijalni_dobitak=$("#potencijalni_dobitak").html();
+
+        //šaljemo bazi podataka odigrani listić
         $.ajax(
             {
                 url: "index.php?rt=sport/update",
@@ -123,6 +128,8 @@ $( document ).ready(function() {
                 }
             } );
     })
+
+    //klikom na ime sporta možemo sakriti ili otkriti utakmice tog sporta
     $("h2").on("click",function()
     {
         var id=$(this).attr("id");
@@ -155,6 +162,8 @@ function crtaj_listic()
         $("#potencijalni_dobitak").html((parseFloat($("#uplaceni_iznos").val())*parseFloat($("#ukupna_kvota").html())).toFixed(3));
 
     }
+
+//brisanje nekog odigranog para sa listića    
 function brisi_par(id){
     var utakmica_id=parseInt(id);
     for(var i=0;i<tiket.length;i++)

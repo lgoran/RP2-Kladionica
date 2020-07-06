@@ -6,7 +6,7 @@ $( document ).ready(function() {
         crtaj();
         $("#canvas").css("position","absolute");
         $("#canvas").css("left","1000px");
-        
+        //crtanje finish-a
         function crtaj() 
         {
             var ctx = $( "#canvas" ).get(0).getContext( "2d" );   
@@ -28,6 +28,7 @@ $( document ).ready(function() {
                     ctx.fillRect( x*10, y*10, 10, 10 );
                 }
         }
+        //klik na botun Ulozi - oklada se zakljucava i psi krecu
         $("#ulozi").on("click",function()
         {
             
@@ -50,6 +51,8 @@ $( document ).ready(function() {
             $("#oklada").hide();
             move_dogs();
         });
+
+        //reguliranje inputa usera za iznos uloga
         $("#ulog").on("input",function()
         {
             var str=$("#ulog").val();
@@ -70,6 +73,7 @@ $( document ).ready(function() {
                 $("#potencijalni_dobitak").html((parseFloat(str)*parseFloat($("#ukupna_kvota").html())).toFixed(3));
             }
         })
+        //funkcija za random pomicanje pasa, svako 10ms random izmedu 1 i 3
         function move_dogs() 
         {
             var flag=false;
@@ -92,6 +96,8 @@ $( document ).ready(function() {
                 setTimeout( move_dogs, 10 ); 
         }
 });
+
+//prilikom pobjede nekog psa reguliramo iznos ovisno o okladi i lokalno i preko ajaxa u bazi
 function reguliraj_iznos(pobjednik,odabrani)
 {
     if(pobjednik===odabrani)

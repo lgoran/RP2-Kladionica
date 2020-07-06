@@ -4,7 +4,7 @@ class IndexController
 {
 	public function index()
 	{
-		// Samo preusmjeri na users podstranicu.
+		// Samo preusmjeri na sport podstranicu.
 		header( 'Location: index.php?rt=sport' );
 	}
 }; 

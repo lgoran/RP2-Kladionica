@@ -3,6 +3,7 @@ require_once __DIR__ . '/../model/kladionicaservice.class.php';
 
 class SportController
 {
+	//pozivanje sport_index.php sa odgovarajucim varijablama
 	public function index() 
 	{
 		$ks = new KladionicaService();
@@ -16,6 +17,7 @@ class SportController
 		}
 		require_once __DIR__ . '/../view/sport_index.php';
 	}
+	//hvatanje ajax poziva za update stanja racuna i slanje tiketa u bazu
 	public function update()
 	{
 		$tiket=$_GET['tiket'];
@@ -27,7 +29,6 @@ class SportController
 		$user_id=$ks->getIdUserByUsername($_SESSION['user']);
 		$ks->promijeniIznos($_SESSION['user'],floatval($stanje_racuna));
 		$ks->staviTiket($user_id,$uplaceni_iznos,$potencijalni_dobitak,$ukupna_kvota);
-		//$ks->napraviRelaciju(56,56,1);
 		$id_tiket=$ks->dohvatiZadnjiTiket();
 		for($i=0;$i<count($tiket);$i++)
 		{

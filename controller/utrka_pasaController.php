@@ -10,6 +10,7 @@ class Utrka_pasaController
 		$title = 'Utrka pasa';		
 		require_once __DIR__ . '/../view/utrka_pasa.php';
 	}
+	//hvatanje ajax poziva za update stanja racuna
 	public function update()
 	{
 		$stanje_racuna=$_GET["stanje_racuna"];
