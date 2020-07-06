@@ -31,6 +31,7 @@ if(isset($_SESSION['logged_in']))
 	// Pozovi odgovarajuću akciju
 	$con->$action();
 }
+//SESSION['x'] = 1 kad je otvoren prozor za registraciju, 0 kad je za login
 else if (isset($_SESSION['x']) && $_SESSION['x'] == 1){
 	/*if (!isset($_GET['i'])){
 		echo 'Uspješna registracija!';
@@ -45,13 +46,24 @@ else if (isset($_SESSION['x']) && $_SESSION['x'] == 1){
 		echo 'Taj user već postoji u bazi.';
 	else if (isset($_GET['i']) && $_GET['i'] == '4'){
 		echo 'Uspješna registracija!';
-		require_once __DIR__ . '/login.php';
+		require_once __DIR__ . '/login/login.php';
+		exit();
+	}
+	else if (isset($_GET['i']) && $_GET['i'] == '5'){
+		require_once __DIR__ . '/login/login.php';
 		exit();
 	}
 
-	require_once __DIR__ . '/register.php';
+
+	require_once __DIR__ . '/login/register.php';
 }
-else
-	require_once __DIR__ . '/login.php';
+else {
+	if (isset($_GET['k']) && $_GET['k'] == '1'){ 
+		require_once __DIR__ . '/login/register.php';
+	}
+	else
+		require_once __DIR__ . '/login/login.php';
+}
+
 
 ?>

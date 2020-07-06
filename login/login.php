@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__ . '/app/database/db.class.php';
+require_once __DIR__ . '/../app/database/db.class.php';
 
 $db = DB::getConnection();
 if(isset($_POST['user']) && $_POST['user']!="" && isset($_POST['pw']) && $_POST['pw']!="")
@@ -55,7 +55,7 @@ $_SESSION['x'] = 0;
 		Username:<input type="text" name="user"><br><br>
 		Password:<input type="password" name="pw"><br>
 		<input type="submit" name="submit" value="Login"><br><br>
-		Ukoliko nemate korisnički račun, otvorite ga <a href="register.php">ovdje</a><br>
+		Ukoliko nemate korisnički račun, otvorite ga <a href="index.php?k=1">ovdje</a><br>
 	</div>
 </form>
 
