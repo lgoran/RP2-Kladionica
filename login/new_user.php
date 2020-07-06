@@ -35,7 +35,7 @@ else
 	// Sve je uspijelo -> napravi login
     $_SESSION['user']=$row['username'];
 	$_SESSION['logged_in']='true';
-	header( 'Location: /../index.php' );
+	header( 'Location: ../index.php' );
 }
 
 ?>
