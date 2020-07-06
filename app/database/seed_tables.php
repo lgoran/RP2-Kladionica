@@ -18,53 +18,53 @@ function seed_table_utakmice()
                              VALUES (:domaci, :gosti, :kvota1, :kvotaX, :kvota2, :kvota1x, :kvota2x, :sport)' );
 
         $st->execute( array( 'domaci' => 'NK Varazdin', 'gosti' => 'GNK Dinamo Zagreb', 'kvota1' => 17.0, 'kvotaX' => 7.0,
-                            'kvota2' =>  1.25, 'kvota1x' => 5.0, 'kvota2x' => 1.05, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  1.25, 'kvota1x' => 5.0, 'kvota2x' => 1.05, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'NK Hajduk Split', 'gosti' => 'NK Inter Zapresic', 'kvota1' => 1.5, 'kvotaX' => 4.8,
-                            'kvota2' =>  8, 'kvota1x' => 1.2, 'kvota2x'=> 4.0, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  8, 'kvota1x' => 1.2, 'kvota2x'=> 4.0, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'NK Istra 1961', 'gosti' => 'HNK Rijeka', 'kvota1' => 6.8, 'kvotaX' => 4.0,
-                            'kvota2' =>  1.5, 'kvota1x' => 2.6, 'kvota2x'=> 1.25, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  1.5, 'kvota1x' => 2.6, 'kvota2x'=> 1.25, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'FC Chelsea', 'gosti' => 'Leicester City', 'kvota1' => 3.5, 'kvotaX' => 5.0,
-                            'kvota2' =>  1.7, 'kvota1x' => 2.25, 'kvota2x'=> 1.25, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  1.7, 'kvota1x' => 2.25, 'kvota2x'=> 1.25, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'Los Angeles Lakers', 'gosti' => 'Memphis Grizzlies', 'kvota1' => 1.25, 'kvotaX' => 15.0,
-                            'kvota2' =>  9.0, 'kvota1x' => 1.05, 'kvota2x'=> 7.0, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  9.0, 'kvota1x' => 1.05, 'kvota2x'=> 7.0, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'Orlando Magic', 'gosti' => 'Toronto Raptors', 'kvota1' => 7.0, 'kvotaX' => 16.5,
-                            'kvota2' =>  1.25, 'kvota1x' => 5.0, 'kvota2x'=> 1.05, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  1.25, 'kvota1x' => 5.0, 'kvota2x'=> 1.05, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'Washington Wizards', 'gosti' => 'Philadelphia 76ers', 'kvota1' => 14.0, 'kvotaX' => 25.0,
-                            'kvota2' =>  1.45, 'kvota1x' => 10.0, 'kvota2x'=> 1.25, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  1.45, 'kvota1x' => 10.0, 'kvota2x'=> 1.25, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'Boston Celtics', 'gosti' => 'Houston Rockets', 'kvota1' => 1.75, 'kvotaX' => 15.0,
-                            'kvota2' =>  2.05, 'kvota1x' => 1.25, 'kvota2x'=> 1.4, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  2.05, 'kvota1x' => 1.25, 'kvota2x'=> 1.4, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'Utah Jazz', 'gosti' => 'Los Angeles Clipper', 'kvota1' => 2.2, 'kvotaX' => 16.0,
-                            'kvota2' =>  1.55, 'kvota1x' => 1.75, 'kvota2x'=> 1.25, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  1.55, 'kvota1x' => 1.75, 'kvota2x'=> 1.25, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'Dallas Mavericks', 'gosti' => 'San Antonio Spurs', 'kvota1' => 1.5, 'kvotaX' => 25.0,
-                            'kvota2' =>  2.45, 'kvota1x' => 1.2, 'kvota2x'=> 2.0, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  2.45, 'kvota1x' => 1.2, 'kvota2x'=> 2.0, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'New Orleans Pelicans', 'gosti' => 'Memphis Grizzlies', 'kvota1' => 1.6, 'kvotaX' => 25.0,
-                            'kvota2' =>  2.1, 'kvota1x' => 1.45, 'kvota2x'=> 1.75, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  2.1, 'kvota1x' => 1.45, 'kvota2x'=> 1.75, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'Portland TrailBlazers', 'gosti' => 'Brooklyn Nets', 'kvota1' => 1.25, 'kvotaX' => 25.0,
-                            'kvota2' =>  3.0, 'kvota1x' => 1.05, 'kvota2x'=> 2.5, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  3.0, 'kvota1x' => 1.05, 'kvota2x'=> 2.5, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'Los Angeles Clippers', 'gosti' => 'Los Angeles Lakers', 'kvota1' => 1.8, 'kvotaX' => 25.0,
-                            'kvota2' =>  2.0, 'kvota1x' => 1.75, 'kvota2x'=> 1.9, 'sport' => 'KOSARKA') );
+                            'kvota2' =>  2.0, 'kvota1x' => 1.75, 'kvota2x'=> 1.9, 'sport' => 'Košarka') );
         $st->execute( array( 'domaci' => 'FC Manchester City', 'gosti' => 'FC Liverpool', 'kvota1' => 1.6, 'kvotaX' => 5.0,
-                            'kvota2' =>  2.0, 'kvota1x' => 1.2, 'kvota2x' => 1.5, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  2.0, 'kvota1x' => 1.2, 'kvota2x' => 1.5, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'FC Manchester United', 'gosti' => 'FC Arsenal', 'kvota1' => 1.4, 'kvotaX' => 7.0,
-                            'kvota2' =>  2.5, 'kvota1x' => 1.1, 'kvota2x' => 1.9, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  2.5, 'kvota1x' => 1.1, 'kvota2x' => 1.9, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'FC Barcelona', 'gosti' => 'FC Atletico Madrid', 'kvota1' => 1.25, 'kvotaX' => 4.0,
-                            'kvota2' =>  2.5, 'kvota1x' => 1.05, 'kvota2x' => 1.75, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  2.5, 'kvota1x' => 1.05, 'kvota2x' => 1.75, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'FC Sevilla', 'gosti' => 'FC Real Madrid', 'kvota1' => 2.5, 'kvotaX' => 3.0,
-                            'kvota2' =>  1.25, 'kvota1x' => 1.5, 'kvota2x' => 1.05, 'sport' => 'NOGOMET') );
+                            'kvota2' =>  1.25, 'kvota1x' => 1.5, 'kvota2x' => 1.05, 'sport' => 'Nogomet') );
         $st->execute( array( 'domaci' => 'Hrvatska', 'gosti' => 'Norveška', 'kvota1' => 2.25, 'kvotaX' => 3.0,
-                            'kvota2' =>  1.5, 'kvota1x' => 1.75, 'kvota2x' => 1.05, 'sport' => 'RUKOMET') );
+                            'kvota2' =>  1.5, 'kvota1x' => 1.75, 'kvota2x' => 1.05, 'sport' => 'Rukomet') );
         $st->execute( array( 'domaci' => 'Francuska', 'gosti' => 'Danska', 'kvota1' => 1.75, 'kvotaX' => 2.75,
-                            'kvota2' =>  2.0, 'kvota1x' => 1.05, 'kvota2x' => 1.2, 'sport' => 'RUKOMET') );
+                            'kvota2' =>  2.0, 'kvota1x' => 1.05, 'kvota2x' => 1.2, 'sport' => 'Rukomet') );
         $st->execute( array( 'domaci' => 'Švedska', 'gosti' => 'Njemačka', 'kvota1' => 2.0, 'kvotaX' => 3.5,
-                            'kvota2' =>  1.75, 'kvota1x' => 1.25, 'kvota2x' => 1.05, 'sport' => 'RUKOMET') );
+                            'kvota2' =>  1.75, 'kvota1x' => 1.25, 'kvota2x' => 1.05, 'sport' => 'Rukomet') );
         $st->execute( array( 'domaci' => 'Slovenija', 'gosti' => 'Hrvatska', 'kvota1' => 2.25, 'kvotaX' => 3.5,
-                            'kvota2' =>  1.5, 'kvota1x' => 1.75, 'kvota2x' => 1.10, 'sport' => 'RUKOMET') );
+                            'kvota2' =>  1.5, 'kvota1x' => 1.75, 'kvota2x' => 1.10, 'sport' => 'Rukomet') );
         $st->execute( array( 'domaci' => 'Njemačka', 'gosti' => 'Francuska', 'kvota1' => 2.3, 'kvotaX' => 3.25,
-                            'kvota2' =>  1.35, 'kvota1x' => 1.75, 'kvota2x' => 1.05, 'sport' => 'RUKOMET') );
+                            'kvota2' =>  1.35, 'kvota1x' => 1.75, 'kvota2x' => 1.05, 'sport' => 'Rukomet') );
         $st->execute( array( 'domaci' => 'Danska', 'gosti' => 'Norveška', 'kvota1' => 1.75, 'kvotaX' => 3.0,
-                            'kvota2' =>  2.0, 'kvota1x' => 1.05, 'kvota2x' => 1.15, 'sport' => 'RUKOMET') );
+                            'kvota2' =>  2.0, 'kvota1x' => 1.05, 'kvota2x' => 1.15, 'sport' => 'Rukomet') );
         $st->execute( array( 'domaci' => 'Njemačka', 'gosti' => 'Island', 'kvota1' => 1.25, 'kvotaX' => 4.0,
-                            'kvota2' =>  3.5, 'kvota1x' => 1.05, 'kvota2x' => 2.25, 'sport' => 'RUKOMET') );
+                            'kvota2' =>  3.5, 'kvota1x' => 1.05, 'kvota2x' => 2.25, 'sport' => 'Rukomet') );
 	}
 	catch( PDOException $e ) { exit( "PDO error (seed_table_utakmice): " . $e->getMessage() ); }
 

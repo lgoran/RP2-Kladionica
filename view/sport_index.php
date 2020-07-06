@@ -13,7 +13,14 @@
 for($j=0;$j<count($utakmice_po_sportovima);$j++)
 {
 	$utakmiceList=$utakmice_po_sportovima[$j];
-	echo '<h2 id="sport' . $j . '">'. $sportList[$j] . '(' . count($utakmiceList) .')</h2>';
+	$naziv_sporta=$sportList[$j];
+	if($naziv_sporta==='kosarka')
+		$naziv_sporta='Ko&#353arka';
+	else if($naziv_sporta==='rukomet')
+		$naziv_sporta='Rukomet';
+	else if($naziv_sporta==='Nogomet')
+		$naziv_sporta='Nogomet';
+	echo '<h2 id="sport' . $j . '">'. $naziv_sporta . '(' . count($utakmiceList) .')</h2>';
 	echo '<table class="tablica_utakmica" id="tabla' . $j . '">';
 		if(count($utakmiceList)!=0)
 		{
