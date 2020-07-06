@@ -19,7 +19,7 @@ for($j=0;$j<count($utakmice_po_sportovima);$j++)
 		$naziv_sporta='Ko&#353arka';
 	else if($naziv_sporta==='rukomet')
 		$naziv_sporta='Rukomet';
-	else if($naziv_sporta==='Nogomet')
+	else if($naziv_sporta==='nogomet')
 		$naziv_sporta='Nogomet';
 	echo '<h2 id="sport' . $j . '">'. $naziv_sporta . '(' . count($utakmiceList) .')</h2>';
 	//ispis tablice odredenog sporta
