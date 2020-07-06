@@ -24,8 +24,10 @@ if(isset($_POST['user']) && $_POST['user']!="" && isset($_POST['pw']) && $_POST[
 		}
 		foreach( $st->fetchAll() as $row )
 		{
-		
-			if( password_verify( $pw, $row['password_hash'] ) )
+			if ($row['has_registered'] == 0){
+				echo "Niste proveli registraciju. Provjerite svoj mail.";
+			}
+			else if( password_verify( $pw, $row['password_hash'] ) )
 			{
 				echo "Uspijesno logiranje";
 				$_SESSION['user']=$user;
