@@ -9,7 +9,7 @@
 <body>
 	<h1>Kladionica</h1>
 	<?php if(isset($_SESSION['user'])) echo 'Dobrodošli @' . $_SESSION['user'].'!'; ?>
-	<span id="user_iznos" style="float:right;"><?php echo $_SESSION['iznos'];?> kredita</span>
+	<span id="user_iznos" style="float:right;"><?php if(isset($_SESSION['iznos'])) echo $_SESSION['iznos'];?> kredita</span>
 	<hr>
 	<ul>
 		<a href="index.php?rt=sport/index">Sport</a>
