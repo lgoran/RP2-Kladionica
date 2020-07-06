@@ -12,6 +12,7 @@ class ListiciController
         //koliko na pocetku prikazujemo listica
         $broj_listica = 2;
 
+	//obrada podatka o broju listica za prikaz
         if(isset($_POST['broj_listica_za_prikaz']))
         {
             $br_t = $_POST['broj_listica_za_prikaz'];
@@ -23,14 +24,20 @@ class ListiciController
                 $broj_listica = (int)$br_t;
             }
         }
+	//spremamo broj listica u SESSION, posto ce ga koristiti i druga funkcija
         $_SESSION['broj_listica'] = $broj_listica;
 
         $ID_User = $ks->getIdUserByUsername( $_SESSION['user'] );
+	//dohvacamo trazeni broj listica trenutnog korisnika, treba nam za ispis kojeg ce obraditi 
+	//odgovarajuca datoteka u view-u
         $ListaTiketa = $ks->dohvatiListice($ID_User, $_SESSION['broj_listica']);
         
 		require_once __DIR__ . '/../view/vasi_listici.php';
     }
     
+	//Funkcija koja sluzi za simulaciju pojedinog listica. Pravu simulaciju odraduje funkcija iz 
+	//modela kladionicaservice. Ovdje obradujemo rezultat, azuriramo stanje iznosa te dajemo
+	//povratnu informaciju o ishodu listica.
     public function simuliraj()
     {
         $ks = new KladionicaService();
