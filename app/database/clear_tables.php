@@ -1,5 +1,6 @@
 <?php
 
+// skripta koja brise podatke iz svih tablica
 require_once __DIR__ . '/db.class.php';
 
 //clear_table_users();

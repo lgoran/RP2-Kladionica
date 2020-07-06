@@ -1,5 +1,5 @@
 <?php
-
+// na novo kreira sve tablice u bazi podataka ako one ne postoje
 require_once __DIR__ . '/db.class.php';
 
 create_table_users();

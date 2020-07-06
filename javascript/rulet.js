@@ -1,3 +1,4 @@
+// glavni program za javascript
 $(document).ready(function () {
     Initialize();
     createTable();
@@ -17,15 +18,16 @@ $(document).ready(function () {
     $("#exitButtonPravila").click(zatvoriPravila);
     $("#roullet").on("contextmenu", removeCoin);
 });
-
-var stanjeNaRacunu; // trebat ce nesto iz sessiona
-var table;
+// inicijalizacija varijabli
+var stanjeNaRacunu;
+var table; // polje u kojem spremamo iznos na pojedinim poljima - na pocetku nula
 var canvas = $("#roullet").get(0);
 var ctx = canvas.getContext("2d");
 var c = document.getElementById("counter").getContext("2d");
 var trenutniUlog = 0;
 var counterVar = 0;
 
+// funkcija inicijalizira gornje varijable i text i pojedinim HTML elementima
 function Initialize()
 {
     $("#divPravila").hide();
@@ -41,6 +43,7 @@ function Initialize()
         table[i] = 0;
 }
 
+// kreiramo plocu za rulet --> koristimo canvas
 function createTable() {
     drawZero();
     drawNumbers();
@@ -48,6 +51,7 @@ function createTable() {
     drawHalfs();
 }
 
+// crtamo polje za nulu
 function drawZero() {
     ctx.beginPath();
     ctx.fillStyle = "lightgreen";
@@ -58,6 +62,7 @@ function drawZero() {
     ctx.fillText("0", 25, 135);
 }
 
+// crtamo jedan broje (ne - nula)
 function drawNumber(i, j) {
     ctx.beginPath();
     if (j % 2 === 0) ctx.fillStyle = "black";
@@ -70,12 +75,14 @@ function drawNumber(i, j) {
     ctx.fillText((i * 12 + j).toString(), j * 50 + 25, i * 50 + 35);
 }
 
+// crtamo sve brojeve pozivajuci gornju funkciju 
 function drawNumbers() {
     for (var i = 0; i < 3; i++)
         for (var j = 1; j <= 12; j++)
             drawNumber(i, j);
 }
 
+// polja 1-12, 13-24, 25-36
 function drawThird(i) {
     ctx.beginPath();
     ctx.fillStyle = "green";
@@ -93,6 +100,8 @@ function drawThirds() {
     }
 }
 
+// crta jedno polje kojim se osvaja dupli iznos
+// prima stupac, boju pozadine i vrijednost polja
 function drawHalf(i, fillColor, value) 
 {
     ctx.beginPath();
@@ -106,6 +115,7 @@ function drawHalf(i, fillColor, value)
     
 }
 
+// crta sve polovine pozivajuci prethodnu funkciju
 function drawHalfs() {
     drawHalf(0, "green", "1 - 18");
     drawHalf(1, "red", "RED");
@@ -113,6 +123,7 @@ function drawHalfs() {
     drawHalf(3, "green", "19 - 36");
 }
 
+// crta zeton na kliknuto polje
 function drawCoin(x, y, value) 
 {
     ctx.beginPath();
@@ -125,6 +136,7 @@ function drawCoin(x, y, value)
     ctx.fillText(value, x * 50 + 25, y * 50 + 35);
 }
 
+// brise zeton s kliknutog polja
 function removeCoin(event) 
 {
     var mousePosition = getMousePosition(event);
@@ -152,6 +164,7 @@ function removeCoin(event)
     return false;
 }
 
+// crtamo counter --> u drugom canvasu
 function drawCounter()
 {
     var grd = c.createRadialGradient(75, 75, 65, 75, 75, 75);
@@ -164,6 +177,7 @@ function drawCounter()
     
 }
 
+// sljedece 2 funkcije sluze za dohvacanje koordinata klika na canvas
 function getRowAndCol(x, y) {
     return {
         i: Math.floor(y / 50),
@@ -180,6 +194,10 @@ function getMousePosition(event)
     };
 }
 
+// funkcija koja kontrolira dogadaje koji se desavaju kada korisnik klikne na canvas
+// pozicionira zeton
+// mijenja logicku tablicu 
+// mijenja iznos na racunu
 function markCell(event)
 {
     var pom = Number ($("#ulog").val() );
@@ -210,6 +228,7 @@ function markCell(event)
        
 }
 
+// update-a tablicu table
 function markTable(i, j) 
 {
     if (j === 0) return {index: 0, i: 0, j: 2 };
@@ -223,6 +242,7 @@ function markTable(i, j)
     return {index: j + i * 12, i: j, j: i };
 }
 
+// pomocna funkcija - provjerava jesu li zadovoljeni uvjeti, tj je li nesto postavljeno na plocu
 function uvjetiZaIgru()
 {
     for (var i = 0; i < 44; i++)
@@ -237,6 +257,7 @@ function getRandomNumber()
     return Math.floor(Math.random() * Math.floor(36));
 }
 
+// racuna dobitak ako je pogoden broj/polje
 function vratiDobitak(izvuceniBroj)
 {
     if (table[izvuceniBroj] !== 0) return 36 * table[izvuceniBroj];
@@ -251,6 +272,8 @@ function vratiDobitak(izvuceniBroj)
     return 0;
 }
 
+// funkcija koa reagira na button Zavrti
+// starta counter, ispisuje izvuceni broj te dobitak/gubitak
 function igraj(ID)
 {
     stopCounter(ID);
@@ -282,6 +305,7 @@ function vidiPravila()
     $("#divPravila").show();
 }
 
+// provjeri je li uneseni ulog prirpdan broj
 function onlyNumbersInput(evt) 
 {
     var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -297,6 +321,7 @@ function resetiraj()
     createTable();
 }
 
+// crta counter
 function fillCounter(counterVar, color) 
 {
     c.font = "bold 90px Comic Sans MS";
@@ -322,6 +347,7 @@ function zatvoriPravila()
     $("#divPravila").hide();
 }
 
+// ajax nakon odigranog kruga
 function updateIznos()
 {
     $.ajax(

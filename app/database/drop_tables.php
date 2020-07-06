@@ -1,5 +1,5 @@
 <?php
-
+// briše tablice iz baze podataka
 require_once __DIR__ . '/db.class.php';
 
 //drop_table_users();
