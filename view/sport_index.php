@@ -37,11 +37,11 @@ for($j=0;$j<count($utakmice_po_sportovima);$j++)
 			$utakmica=$utakmiceList[$i];
 			echo '<tr>' .
 				 '<td>'. $utakmica->domaci . '</td>' . '<td>'. $utakmica->gosti . '</td>' . 
-				 '<td><button id="' . $utakmica->id .'b1">'. $utakmica->kvota1 . '</button></td>' . 
-				 '<td><button id="' . $utakmica->id .'bX">'. $utakmica->kvotaX . '</button></td>' . 
-				 '<td><button id="' . $utakmica->id .'b2">'. $utakmica->kvota2 . '</button></td>' . 
-				 '<td><button id="' . $utakmica->id .'b1X">'. $utakmica->kvota1X . '</button></td>' .
-				 '<td><button id="' . $utakmica->id .'b2X">'. $utakmica->kvota2X . '</button></td>' .  
+				 '<td><button class="oklada_botun" id="' . $utakmica->id .'b1">'. $utakmica->kvota1 . '</button></td>' . 
+				 '<td><button class="oklada_botun" id="' . $utakmica->id .'bX">'. $utakmica->kvotaX . '</button></td>' . 
+				 '<td><button class="oklada_botun" id="' . $utakmica->id .'b2">'. $utakmica->kvota2 . '</button></td>' . 
+				 '<td><button class="oklada_botun" id="' . $utakmica->id .'b1X">'. $utakmica->kvota1X . '</button></td>' .
+				 '<td><button class="oklada_botun" id="' . $utakmica->id .'b2X">'. $utakmica->kvota2X . '</button></td>' .  
 			     '</tr>';
 		}
 	echo '</table>';

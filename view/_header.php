@@ -4,11 +4,12 @@
 	<meta charset="utf8">
 	<title>Kladionica</title>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style2.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 </head>
 <body>
-	<h1>Kladionica</h1>
-	<?php if(isset($_SESSION['user'])) echo 'Dobrodošli @' . $_SESSION['user'].'!'; ?>
+	<h1 class="naslov">Kladionica</h1>
+	<?php if(isset($_SESSION['user'])) echo 'Dobrodošli @<b>' . $_SESSION['user'].'</b>!'; ?>
 	<span id="user_iznos" style="float:right;"><?php if(isset($_SESSION['iznos'])) echo $_SESSION['iznos'];?> kredita</span>
 	<hr>
 	<ul>
